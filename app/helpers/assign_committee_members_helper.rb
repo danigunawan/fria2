@@ -1,0 +1,2 @@
+module AssignCommitteeMembersHelper
+end

@@ -1,0 +1,24 @@
+<h1>Proposal Details</h1>
+<div class="well">
+Title: <%=  @proposal.title %><br>
+Researcher: <%= User.find(id = @proposal.researcher.user_id).full_name %><br>
+Co-researchers: <%= @proposal.coresearchers %><br>
+Objectives: <%= @proposal.objectives %><br>
+Description: <%= @proposal.descriptions %><br>
+</div>
+<br>
+<% if can? :read, @proposal %>
+	<td>
+		<%= link_to "Download proposal", @proposal.avatar_url, :class => "btn btn-primary" %>
+	</td>
+<% end %>
+<% if can? :update, @proposal %>
+	<%= link_to 'Edit', edit_proposal_path(@proposal), :class => "btn btn-primary" %>
+<% end %>
+<% if can? :review, @proposal %>
+	<%= link_to "See Reviews", reviews_page_path(@proposal.id), :class => "btn btn-primary"%>
+<% end %>
+<% if can? :veto, @proposal %>
+    <%= link_to "Veto", veto_path(@proposal.id), :class => "btn btn-primary" %>
+<% end %>
+<%= link_to 'Back', proposals_path, :class => "btn btn-primary" %>

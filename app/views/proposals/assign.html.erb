@@ -1,0 +1,55 @@
+<h1>Assign Committee</h1>
+<div class="well">
+Title: <%= @proposal.title %><br>
+Researcher: <%= User.find(id = @proposal.researcher.user_id).full_name %> <br>
+Co-researchers: <%= @proposal.coresearchers %><br>
+Objectives: <%= @proposal.objectives %><br>
+Description: <%= @proposal.descriptions %><br>
+</div>
+<table class="table">
+	<thead>
+		<th>Eligible Committee Heads:</th>
+		<th colspan="1"></th>
+	</thead>
+	<% if @heads %>
+		<% @heads.each do |head| %>
+			<tr>
+				<td><%= User.find(head.id).full_name %> (Current)</td>
+				<td><%= link_to "Remove from Proposal", remove_head_from_proposal_path(:proposalid => @proposal.id,:memberid => head.id), :method => :post %></td>
+			</tr>
+		<% end %>
+	<% end %>
+	<% if @possible_heads %>
+		<% @possible_heads.each do |possible_head| %>
+			<tr>
+				<td><%= User.find(possible_head.user_id).full_name %></td>
+				<td><%= link_to "Assign to Proposal", assign_head_to_proposal_path(:proposalid => @proposal.id,:memberid => possible_head.id), :method => :post %></td>
+			</tr>
+		<% end %>
+	<% end %>
+</table>
+
+<table class="table">
+	<thead>
+		<th>Eligible Reviewers:</th>
+		<th colspan="1"></th>
+	</thead>
+	<% if @reviewers %>
+		<% @reviewers.each do |reviewer| %>
+			<tr>
+				<td><%= User.find(reviewer.id).full_name %> (Current)</td>
+				<td><%= link_to "Remove from Proposal", remove_member_from_proposal_path(:proposalid => @proposal.id,:memberid => reviewer.id), :method => :post %></td>
+			</tr>
+		<% end %>
+	<% end %>
+	<% if @possible_reviewers %>
+		<% @possible_reviewers.each do |possible_reviewer| %>
+			<tr>
+				<td><%= User.find(possible_reviewer.user_id).full_name %></td>
+				<td><%= link_to "Assign to Proposal", assign_member_to_proposal_path(:proposalid => @proposal.id,:memberid => possible_reviewer.id), :method => :post %></td>
+			</tr>
+		<% end %>
+	<% end %>
+</table>
+
+<%= link_to 'Back', proposals_page_path, :class => "btn btn-primary" %>

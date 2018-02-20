@@ -1,0 +1,26 @@
+<h1>Announcements</h1>
+<p id="notice"><%= notice %></p>
+
+<%= link_to 'New Announcement', new_announcement_path, :class => "btn btn-primary" %>
+
+<table class = "table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Body</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @announcements.each do |announcement| %>
+      <tr>
+        <td><%= announcement.title %></td>
+        <td><p><%= announcement.body %></p></td>
+        <td><%= link_to 'Show', announcement %></td>
+        <td><%= link_to 'Edit', edit_announcement_path(announcement) %></td>
+        <td><%= link_to 'Delete', announcement, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

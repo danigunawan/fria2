@@ -1,0 +1,10 @@
+<h1>Account Management</h1>
+<table class = "table">
+<% @users.each do |user| %>
+  <tr>
+      <td><%= user.last_name %>, <%= user.first_name %></td>
+      <td><%= link_to "View Details", view_user_path(user.id) %></td>
+      <td><%= link_to "Edit Privileges", edit_account_path(user.id) %></td>
+  </tr>
+<% end %>
+</table>

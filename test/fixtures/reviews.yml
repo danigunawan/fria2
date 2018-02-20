@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  proposal_id: 1
+  user_id: 1
+  attachment: MyString
+  comment: MyText
+  is_decided: false
+  is_vote_yes: false
+
+two:
+  proposal_id: 1
+  user_id: 1
+  attachment: MyString
+  comment: MyText
+  is_decided: false
+  is_vote_yes: false

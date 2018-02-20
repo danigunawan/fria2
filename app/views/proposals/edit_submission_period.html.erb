@@ -1,0 +1,11 @@
+<% if can? :edit, SubmissionPeriod %>
+<h1>Set Submission Period</h1>
+  <%= form_for edit_period_path, :method => :post do |f| %>
+    <div class="well">
+      <h2>Enter deadline:</h2>
+      <%= f.datetime_field :date %><br>
+    </div>
+    <br><%= f.submit "Submit", :class => "btn btn-primary" %>
+    <%= link_to 'Back', proposals_path, :class => "btn btn-primary" %>
+  <% end %>
+<% end %>

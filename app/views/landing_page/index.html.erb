@@ -1,0 +1,40 @@
+<h1> Announcements </h1>
+<div class="well">
+  <% @announcements.each do |announcement| %>
+      <b><h1><%= announcement.title %></h1></b>
+      <%= announcement.body %><br>
+  <% end %>
+</div>
+
+<% if user_signed_in? %>
+  <% if @multiple_types %>
+    <% if !current_user.curr_type %>
+        Not signed in as anything. Please enter user type below:<br>
+    <% end %>
+    <%= form_tag do %>
+        <% if @can_be_researcher %>
+            <%= radio_button_tag :curr_type, 'Researcher'%>
+            <%= label :curr_type_researcher, 'Researcher' %>
+        <% end %>
+        <% if @can_be_dean %>
+            <%= radio_button_tag :curr_type, 'Dean' %>
+            <%= label :curr_type_dean, 'Dean' %>
+        <% end %>
+        <% if @can_be_admin %>
+            <%= radio_button_tag :curr_type, 'Admin' %>
+            <%= label :curr_type_admin, 'Admin' %>
+        <% end %>
+        <% if @can_be_committee_member %>
+            <%= radio_button_tag :curr_type, 'CommitteeMember'%>
+            <%= label :curr_type_committee_member, 'Committee Member' %>
+        <% end %>
+        <% if @can_be_committee_head %>
+            <%= radio_button_tag :curr_type, 'CommitteeHead'%>
+            <%= label :curr_type_committee_head, 'Committee Head' %>
+        <% end %>
+        <%= submit_tag "Submit", :name => 'start_draft' %>
+    <% end %>
+  <% end %>
+<% end %>
+<!-- <h1>UP Official Time</h1>
+<%= @current_time %> -->

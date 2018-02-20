@@ -1,0 +1,83 @@
+<h1>Proposals</h1>
+
+<table class = "table">
+<% if can? :create, Proposal %>
+    <%= link_to "New Proposal", new_proposal_path, :class => "btn btn-primary" %>
+<% end %>
+<% @proposals.each do |proposal| %>
+      <tr>
+	      <% if can? :read, proposal %>
+	      	<td>
+				<%= link_to proposal.title, proposal_url(proposal.id) %>
+			</td>
+		<% else %>
+			<td>
+				<%= proposal.title %>
+			</td>
+		<% end %>
+        <% if can? :update, proposal %>
+	        <td>
+	        	<%= link_to "Update", edit_proposal_path(proposal.id) %>
+	        </td>
+	    <% end %>
+	    <% if can? :destroy, proposal %>
+        	<td>
+                <%= link_to "Delete",  proposal, method: :delete %>
+        	</td>
+        <% end %>
+        <% if can? :review, proposal %>
+        	<td>
+                <%= link_to "See reviews", reviews_page_path(proposal.id) %>
+        	</td>
+        <% end %>
+        <% if can? :assign, proposal %>
+            <td>
+                <% if proposal.is_assigned_reviewers %>
+                    Assigned
+                <% else %>
+                    Not yet Assigned
+                <% end %>
+            </td>
+            <td>
+                <% if proposal.is_assigned_reviewers %>
+                    <%= link_to "Reassign", assign_proposal_path(proposal.id) %>
+                <% else %>
+                    <%= link_to "Assign", assign_proposal_path(proposal.id) %>
+                <% end %>
+            </td>
+        <% end %>
+        <% if can? :review, proposal %>
+            <% if proposal.submission_period.is_set == false%>
+                <% if can? :update, proposal.submission_period %>
+                    <td>
+                        <%= link_to "Set proposal timeline", edit_submission_period_path(proposal.id) %>
+                    </td>
+                <% end %>
+            <% else %>
+                <% if can? :update, proposal.submission_period %>
+                    <td>
+                        <%= link_to "Update proposal timeline", edit_submission_period_path(proposal.id) %>
+                    </td>
+                <% end %>
+                <% if current_user.curr_type == 'CommitteeMember' %>
+                    <td>
+                        <% if !Review.find_by('committee_member_id = ? AND proposal_id = ?', current_user.committee_member.id, proposal.id).is_decided %>
+                            Not yet voted
+                        <% else %>
+                            Voted
+                        <% end %>
+                    </td>
+                <% elsif current_user.curr_type == 'CommitteeHead' %>
+                    <td>
+                        <% if !Review.find_by('committee_head_id = ? AND proposal_id = ?', current_user.committee_head.id, proposal.id).is_decided %>
+                            Not yet voted
+                        <% else %>
+                            Voted
+                        <% end %>
+                    </td>
+                <% end %>
+            <% end %>
+        <% end %>
+      </tr>
+<% end %>
+</table>

@@ -1,0 +1,16 @@
+<h1>Account Details</h1>
+<div class="well">
+  <%= "First Name: " + @user.first_name %>
+  <br>
+  <%= "Last Name: " + @user.last_name %>
+  <br>
+  <%= "Department: " + @user.department %>
+  <br>
+  <%= "Rank: " + @user.rank %>
+  <br>
+  <%= "Contact Number: " + @user.contact_number %>
+  <br>
+  <%= "Email: " + @user.email %>
+</div>
+<br>
+<%= link_to 'Back', assign_account_path, :class => "btn btn-primary" %>

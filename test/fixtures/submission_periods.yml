@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  proposal_id: 1
+  start: 2017-11-21 14:25:37
+  end: 2017-11-21 14:25:37
+
+two:
+  proposal_id: 1
+  start: 2017-11-21 14:25:37
+  end: 2017-11-21 14:25:37

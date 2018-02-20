@@ -1,0 +1,55 @@
+<h1>Review Proposal</h1>
+<div class="well">
+  Title: <%= @proposal.title %><br>
+  Researcher: <%= User.find(id = @proposal.researcher.user_id).full_name %><br>
+  Co-researchers: <%= @proposal.coresearchers %><br>
+  Objectives: <%= @proposal.objectives %><br>
+  Description: <%= @proposal.descriptions %>
+</div>
+<br>
+<% if can? :update, @my_review %>
+    <% if @my_review.is_decided %>
+        <%= link_to "Update my review", edit_review_path(:reviewid=>@my_review.id, :proposalid=>@proposal.id), :class => "btn btn-primary" %>
+    <% else %>
+        <%= link_to "Review", edit_review_path(:reviewid=>@my_review.id, :proposalid=>@proposal.id), :class => "btn btn-primary" %>
+    <% end %>
+<% end %>
+<table class = "table">
+<thead><h2>Reviews</h2></thead>
+<%#= link_to "New review", new_review_path(:id=>@proposal.id), :class => "btn btn-primary" %>
+
+<% @reviews.each do |review| %>
+      <tr>
+        <td><%= review.comment %></td>
+        <td>
+            <% if review.is_decided %>
+                <% if review.vote == 1 %>
+                    Accept
+                <% elsif review.vote == -1 %>
+                    Reject
+                <% elsif review.vote == 0 %>
+                    Resubmit
+                <% end %>
+            <% end %>
+        </td>
+        <td>
+            <% if !review.is_decided %>
+                Not yet voted
+            <% else %>
+                Voted
+            <% end %>
+        </td>
+        <td>
+        	<% if !review.committee_member_id.nil? %>
+        		<%= User.find(id = review.committee_member.user_id).full_name %>
+        	<% else %>
+        		<%= User.find(id = review.committee_head.user_id).full_name %>
+        	<% end %>
+        </td>
+      </tr>
+<% end %>
+</table>
+<% if can? :veto, @proposal %>
+    <%= link_to "Veto", veto_path(@proposal.id), :class => "btn btn-primary" %>
+<% end %>
+<%= link_to 'Back', proposals_path, :class => "btn btn-primary" %>

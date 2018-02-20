@@ -1,0 +1,10 @@
+<h1>Edit Proposal</h1>
+<div class="well">
+  <%= form_for @proposal, html: { multipart: true } do |f| %>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+    <br><br><%= f.label 'File' %>
+    <%= f.file_field :avatar, accept: '.pdf' %>
+    <%= f.submit "Save", :class => "btn btn-primary" %>
+  <% end %>
+</div>
