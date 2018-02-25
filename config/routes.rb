@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :proposals
   resources :reviews
+  resources :comments
 
   root :to => 'landing_page#index'
   post '/' => 'landing_page#index', as:'home_page'

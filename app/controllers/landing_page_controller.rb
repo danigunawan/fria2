@@ -1,6 +1,5 @@
 class LandingPageController < ApplicationController
 	def index
-		@user ||= User.new
 		@announcements = Announcement.all
 		@users = User.all
 		@multiple_types = false

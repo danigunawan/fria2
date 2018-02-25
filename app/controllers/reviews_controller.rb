@@ -1,6 +1,8 @@
 class ReviewsController < ApplicationController
 	def index
 		@proposal = Proposal.find(params[:id])
+		@comment = Comment.new
+		@comment.proposal_id = @proposal.id
 		@reviews = @proposal.reviews
 		authorize! :index, Review
 		@my_review = nil
@@ -62,7 +64,6 @@ class ReviewsController < ApplicationController
 			render 'edit'
 		end
 	end
-
 
 	private 
 

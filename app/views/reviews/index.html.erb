@@ -52,6 +52,19 @@
       </tr>
 <% end %>
 </table>
+<h2>Comments</h2>
+<% @proposal.comments.each do |comment| %>
+    <%= comment %>
+<% end %>
+
+<%= form_for @comment, :remote => true do |f| %>
+    <p>
+    <%= f.label :comment, "New Comment" %><br/>
+    <%= f.text_area :comment %>
+    </p>
+    <p><%= f.submit "Add Comment"%></p>
+<% end %>
+
 <% if can? :veto, @proposal %>
     <%= link_to "Veto", veto_path(@proposal.id), :class => "btn btn-primary" %>
 <% end %>

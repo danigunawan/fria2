@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180201073224) do
+ActiveRecord::Schema.define(version: 20180225092540) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,20 @@ ActiveRecord::Schema.define(version: 20180201073224) do
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "committee_member_id"
+    t.bigint "committee_head_id"
+    t.bigint "dean_id"
+    t.bigint "proposal_id"
+    t.index ["committee_head_id"], name: "index_comments_on_committee_head_id"
+    t.index ["committee_member_id"], name: "index_comments_on_committee_member_id"
+    t.index ["dean_id"], name: "index_comments_on_dean_id"
+    t.index ["proposal_id"], name: "index_comments_on_proposal_id"
   end
 
   create_table "committee_heads", force: :cascade do |t|
@@ -133,6 +147,10 @@ ActiveRecord::Schema.define(version: 20180201073224) do
   end
 
   add_foreign_key "admins", "users"
+  add_foreign_key "comments", "committee_heads"
+  add_foreign_key "comments", "committee_members"
+  add_foreign_key "comments", "deans"
+  add_foreign_key "comments", "proposals"
   add_foreign_key "committee_heads", "users"
   add_foreign_key "committee_members", "users"
   add_foreign_key "deans", "users"
