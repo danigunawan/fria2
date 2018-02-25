@@ -49,6 +49,10 @@
       </tr>
 <% end %>
 </table>
+
+<% @proposal.comments.each do |comment| %>
+    <%= comment %>
+<% end %>
 <% if can? :veto, @proposal %>
     <%= link_to "Veto", veto_path(@proposal.id), :class => "btn btn-primary" %>
 <% end %>
