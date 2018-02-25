@@ -8,6 +8,7 @@ class Proposal < ApplicationRecord
 	has_many :reviews, dependent: :destroy
 	has_many :committee_members, through: :reviews
 	has_many :committee_heads, through: :reviews
+	has_many :comments
 
 	mount_uploader :avatar, AvatarUploader
 	def set_defaults
