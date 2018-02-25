@@ -1,6 +1,6 @@
 <% if can? :edit, SubmissionPeriod %>
 <h1>Set Submission Period</h1>
-  <%= form_for edit_period_path, :method => :post do |f| %>
+  <%= form_for edit_period_path, :method => :post do |f|%>
     <div class="well">
       <h2>Enter deadline:</h2>
       <%= f.datetime_field :date %><br>

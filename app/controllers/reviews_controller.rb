@@ -11,6 +11,12 @@ class ReviewsController < ApplicationController
 		else
 			@my_review = nil
 		end
+
+		@canvote = false
+		if Time.now < @proposal.submission_period.start_votation
+			@canvote = true
+		end
+
 	end
 
 	def new

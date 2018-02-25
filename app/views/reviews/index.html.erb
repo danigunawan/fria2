@@ -8,10 +8,13 @@
 </div>
 <br>
 <% if can? :update, @my_review %>
-    <% if @my_review.is_decided %>
-        <%= link_to "Update my review", edit_review_path(:reviewid=>@my_review.id, :proposalid=>@proposal.id), :class => "btn btn-primary" %>
-    <% else %>
-        <%= link_to "Review", edit_review_path(:reviewid=>@my_review.id, :proposalid=>@proposal.id), :class => "btn btn-primary" %>
+    <% if @canvote %>
+        <% if @my_review.is_decided %>
+            <%= link_to "Update my review", edit_review_path(:reviewid=>@my_review.id, :proposalid=>@proposal.id), :class => "btn btn-primary" %>
+        <% else %>
+            <%= link_to "Review", edit_review_path(:reviewid=>@my_review.id, :proposalid=>@proposal.id), :class => "btn btn-primary" %>
+        <% end %>
+    <% else %> Voting is Closed
     <% end %>
 <% end %>
 <table class = "table">

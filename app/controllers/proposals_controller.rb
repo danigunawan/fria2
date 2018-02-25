@@ -159,12 +159,13 @@ class ProposalsController < ApplicationController
 	def edit_period
 		@proposal = Proposal.find(params[:id])
 		@proposal.submission_period.is_set = true
-		@proposal.submission_period.start_votation = params[:date]
+		s = "/proposals/"
+		s << params[:id].to_s
+		s << "/editsubmissionperiod"
+		@proposal.submission_period.start_votation = params[s][:date]
 		@proposal.submission_period.save!
 		@proposal.save!
-		puts "+++++"
-		puts params[:date]
-		puts "+++++"
+		
 
 		redirect_to proposals_page_path
 	end
