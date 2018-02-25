@@ -15,9 +15,12 @@ class ReviewsController < ApplicationController
 		end
 
 		@canvote = false
-		if Time.now < @proposal.submission_period.start_votation
-			@canvote = true
+		if(@proposal.submission_period.end_votation) and (@proposal.submission_period.start_votation)
+			if (Time.now < @proposal.submission_period.end_votation) and (Time.now > @proposal.submission_period.start_votation)
+				@canvote = true
+			end
 		end
+		
 
 	end
 

@@ -162,7 +162,8 @@ class ProposalsController < ApplicationController
 		s = "/proposals/"
 		s << params[:id].to_s
 		s << "/editsubmissionperiod"
-		@proposal.submission_period.start_votation = params[s][:date]
+		@proposal.submission_period.start_votation = params[s][:start]
+		@proposal.submission_period.end_votation = params[s][:deadline]
 		@proposal.submission_period.save!
 		@proposal.save!
 		
