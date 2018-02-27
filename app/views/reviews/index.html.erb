@@ -52,7 +52,7 @@
       </tr>
 <% end %>
 </table>
-<h2>Comments</h2>
+<!-- <h2>Comments</h2>
 <% @proposal.comments.each do |comment| %>
     <%= comment %>
 <% end %>
@@ -63,7 +63,7 @@
     <%= f.text_area :comment %>
     </p>
     <p><%= f.submit "Add Comment"%></p>
-<% end %>
+<% end %> -->
 
 <% if can? :veto, @proposal %>
     <%= link_to "Uphold", veto_path(@proposal.id), :class => "btn btn-primary" %>
