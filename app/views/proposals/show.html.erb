@@ -19,6 +19,7 @@ Description: <%= @proposal.descriptions %><br>
 	<%= link_to "See Reviews", reviews_page_path(@proposal.id), :class => "btn btn-primary"%>
 <% end %>
 <% if can? :veto, @proposal %>
+		<%= link_to "Uphold", veto_path(@proposal.id), :class => "btn btn-primary" %>
     <%= link_to "Veto", veto_path(@proposal.id), :class => "btn btn-primary" %>
 <% end %>
 <%= link_to 'Back', proposals_path, :class => "btn btn-primary" %>
