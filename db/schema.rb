@@ -96,7 +96,6 @@ ActiveRecord::Schema.define(version: 20180225092540) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.text "comment"
     t.integer "vote"
     t.boolean "is_decided"
     t.datetime "created_at", null: false
