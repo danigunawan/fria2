@@ -5,7 +5,6 @@ class Review < ApplicationRecord
 	after_initialize :set_defaults
 
 	def set_defaults
-		self.comment ||= ''
 		self.vote ||= -1
 		self.is_decided = false if self.is_decided.nil?
 	end
