@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   post '/proposals/:id/editsubmissionperiod' => 'proposals#edit_period', as: 'edit_period'
   get '/under_construction', to: "landing_page#under_construction", as: "under_construction"
   get 'proposals/:id/reviews' => 'reviews#index', as: 'reviews_page'
+  post 'proposals/:id/reviews' => 'reviews#add_comment', as:"add_comment"
   get '/assign' => 'users#index', as: 'assign_account'
   get '/user/:id' => 'users#view', as: 'view_user'
   get '/remove/:id' => 'users#edit', as: 'edit_account'
