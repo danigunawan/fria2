@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   # before_create :set_user_type
   after_initialize :set_defaults
-  after_initialize :create_types  
+  after_create :create_types  
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_one :admin, dependent: :destroy
@@ -23,11 +23,11 @@ class User < ApplicationRecord
   end
 
   def create_types
-    self.create_committee_member!() if self.committee_member.nil?
-    self.create_admin!() if self.admin.nil?
-    self.create_dean!() if self.dean.nil?
-    self.create_committee_head!() if self.committee_head.nil?
-    self.create_researcher!() if self.researcher.nil?
+    self.create_committee_member!(user_id: self.id) if self.committee_member.nil?
+    self.create_admin!(user_id: self.id) if self.admin.nil?
+    self.create_dean!(user_id: self.id) if self.dean.nil?
+    self.create_committee_head!(user_id: self.id) if self.committee_head.nil?
+    self.create_researcher!(user_id: self.id) if self.researcher.nil?
   end
 
   def full_name

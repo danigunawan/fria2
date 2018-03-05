@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   post '/' => 'landing_page#index', as:'home_page'
   get '/proposals' => 'proposals#index', as:'proposals_page'
   get '/proposals/:id/veto' => 'proposals#veto', as: 'veto'
+  post '/proposals/:id/veto' => 'proposals#vetoed', as: 'vetoed'
   get '/proposals/:id/assign' => 'proposals#assign', as: 'assign_proposal'
   post '/proposals/:id/assignhead/:memberid' => 'proposals#assign_head_to_proposal', as: 'assign_head_to_proposal'
   post '/proposals/:id/assignmember/:memberid' => 'proposals#assign_member_to_proposal', as: 'assign_member_to_proposal'
@@ -19,6 +20,7 @@ Rails.application.routes.draw do
   get '/under_construction', to: "landing_page#under_construction", as: "under_construction"
   get 'proposals/:id/reviews' => 'reviews#index', as: 'reviews_page'
   post 'proposals/:id/reviews' => 'reviews#add_comment', as:"add_comment"
+  post 'proposals/:id/uphold' => 'proposals#uphold', as:"uphold"
   get '/assign' => 'users#index', as: 'assign_account'
   get '/user/:id' => 'users#view', as: 'view_user'
   get '/remove/:id' => 'users#edit', as: 'edit_account'

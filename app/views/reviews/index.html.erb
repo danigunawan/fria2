@@ -23,7 +23,6 @@
 
 <% @reviews.each do |review| %>
       <tr>
-        <td><%= review.comment %></td>
         <td>
             <% if review.is_decided %>
                 <% if review.vote == 1 %>
@@ -81,7 +80,7 @@
 <% end %>
 
 <% if can? :veto, @proposal %>
-    <%= link_to "Uphold", veto_path(@proposal.id), :class => "btn btn-primary" %>
+    <%= link_to "Uphold", uphold_path(@proposal.id), :class => "btn btn-primary", :method => :post %>
     <%= link_to "Veto", veto_path(@proposal.id), :class => "btn btn-primary" %>
 <% end %>
 <%= link_to 'Back', proposals_path, :class => "btn btn-primary" %>

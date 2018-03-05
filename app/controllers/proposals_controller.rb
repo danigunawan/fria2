@@ -17,12 +17,15 @@ class ProposalsController < ApplicationController
 	def index
 		authorize! :index, Proposal
 		@proposals = []
-		if current_user.curr_type == 'CommitteeMember'
-			@proposals += current_user.committee_member.proposals
-		elsif current_user.curr_type == 'CommitteeHead'
-			@proposals += current_user.committee_head.proposals
-		else
-			@proposals = Proposal.accessible_by(current_ability).order('id DESC')
+		if current_user
+
+			if current_user.curr_type == 'CommitteeMember'
+				@proposals += current_user.committee_member.proposals
+			elsif current_user.curr_type == 'CommitteeHead'
+				@proposals += current_user.committee_head.proposals
+			else
+				@proposals = Proposal.accessible_by(current_ability).order('id DESC')
+			end
 		end
 	end
 
@@ -55,11 +58,39 @@ class ProposalsController < ApplicationController
 
 	def veto
 		@proposal = Proposal.find(params[:id])
+		@reviews = @proposal.reviews
 		authorize! :veto, @proposal
-		@proposal.is_vetoed = true
-		if @proposal.save
-			redirect_to proposals_page_path
+		@reviews.each do |review|
+			if review.committee_member_id.nil?
+				@headreview = review
+			end
 		end
+		@proposal.save!
+	end
+
+	def vetoed
+		@proposal = Proposal.find(params[:id])
+		s = "/proposals/"
+		s << params[:id].to_s
+		s << "/veto"
+		@proposal.status = params[s][:vote]
+		@proposal.is_decided = 1
+		@proposal.save!
+		redirect_to proposals_page_path
+	end
+
+	def uphold
+		@proposal = Proposal.find(params[:id])
+		@reviews = @proposal.reviews
+		@reviews.each do |review|
+			if review.committee_member_id.nil?
+				@proposal.status = review.vote
+				@proposal.is_decided = 1
+			end
+		end
+		@proposal.save!
+
+		redirect_to reviews_page_path
 	end
 
 	def assign
@@ -101,6 +132,7 @@ class ProposalsController < ApplicationController
 		@proposal = Proposal.find(params[:proposalid])
 		authorize! :assign, @proposal
 		@reviewer = CommitteeHead.find(params[:memberid])
+		review = Review.where('proposal_id = ? and committee_head = ?', @proposal.id, @reviewer.id)
 		@reviewer.proposals.append(@proposal)
 		if @proposal.committee_members.length == 2 and @proposal.committee_heads.length == 1
 			@proposal.is_assigned_reviewers = true

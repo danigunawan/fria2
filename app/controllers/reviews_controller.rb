@@ -88,9 +88,11 @@ class ReviewsController < ApplicationController
 		redirect_to reviews_page_path
 	end
 
+	
+
 	private 
 
 	def review_params
-      params.require(:review).permit(:comment,:vote)		
+      params.require(:review).permit(:vote)		
 	end
 end
