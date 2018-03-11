@@ -9,7 +9,9 @@ Description: <%= @proposal.descriptions %><br>
 <br>
 <% if can? :read, @proposal %>
 	<td>
-		<%= link_to "Download proposal", @proposal.avatar_url, :class => "btn btn-primary" %>
+		<% if @proposal.avatar_url %>
+			<%= link_to "Download proposal", @proposal.avatar_url, :class => "btn btn-primary" %>
+		<% end %>
 	</td>
 <% end %>
 <% if can? :update, @proposal %>

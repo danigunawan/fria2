@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   # before_create :set_user_type
   after_initialize :set_defaults
-  after_create :create_types  
+  after_initialize :create_types  
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_one :admin, dependent: :destroy

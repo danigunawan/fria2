@@ -34,9 +34,9 @@ class Ability
       can :read, Proposal, researcher_id: user.researcher.id
       can :create, Proposal
       can :new, Proposal
-      can :edit, Proposal, researcher_id: user.researcher.id
-      can :update, Proposal, researcher_id: user.researcher.id
-      can :destroy, Proposal, researcher_id: user.researcher.id
+      can :edit, Proposal, researcher_id: user.researcher.id, is_decided: false 
+      can :update, Proposal, researcher_id: user.researcher.id, is_decided: false
+      can :destroy, Proposal, researcher_id: user.researcher.id, is_decided: false
     elsif user.curr_type == 'CommitteeMember'
       can :index, Proposal, is_submitted: true
       can :read, Proposal, is_submitted: true

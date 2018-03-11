@@ -22,7 +22,7 @@
 	    <% end %>
 	    <% if can? :destroy, proposal %>
         	<td>
-                <%= link_to "Delete",  proposal, method: :delete %>
+                <%= link_to "Delete",  proposal, method: :delete, data: { confirm: 'Are you sure?'} %>
         	</td>
         <% end %>
         <% if can? :review, proposal %>

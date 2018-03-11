@@ -18,7 +18,6 @@ class ProposalsController < ApplicationController
 		authorize! :index, Proposal
 		@proposals = []
 		if current_user
-
 			if current_user.curr_type == 'CommitteeMember'
 				@proposals += current_user.committee_member.proposals
 			elsif current_user.curr_type == 'CommitteeHead'
