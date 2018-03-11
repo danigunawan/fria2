@@ -109,15 +109,12 @@ ActiveRecord::Schema.define(version: 20180225092540) do
   end
 
   create_table "submission_periods", force: :cascade do |t|
-    t.datetime "start_draft"
-    t.datetime "end_draft"
     t.datetime "start_votation"
     t.datetime "end_votation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "proposal_id"
     t.boolean "is_set"
-    t.boolean "is_active_draft"
     t.boolean "is_active_votation"
     t.index ["proposal_id"], name: "index_submission_periods_on_proposal_id"
   end
