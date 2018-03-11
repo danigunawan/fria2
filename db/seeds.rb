@@ -15,6 +15,7 @@ proposal.submission_period = SubmissionPeriod.create!(start_votation: DateTime.p
 proposal = researcher.proposals.create!(title: 'Hypertext Transfer Protocol 10-way handshake',researcher_name: 'Dawn Fernandez', coresearchers: 'Monique Tucker', objectives: 'To produce a secure way of exchanging information in HTTP.', descriptions: 'The 10-way handshake includes a handshake between all layers from Physical to Application.', is_assigned_reviewers: false, is_vetoed: false, is_decided: false, avatar: File.open(Rails.root + "app/assets/test_uploads/test.pdf"))
 proposal.submission_period = SubmissionPeriod.create!(start_votation: DateTime.parse("22th Jan 2018 8:00:00 PM"), end_votation: DateTime.parse("20th Feb 2017 8:00:00 PM"), is_set: true, is_active_votation: true)
 proposal = researcher.proposals.create!(title: 'Dijkstra\'s Algorithm Refinements', researcher_name: 'Dawn Fernandez', coresearchers: 'Tyler Ortiz', objectives: 'To improve Uniform-Cost searches', descriptions: 'This algorithm is the same as Dijkstra\'s algorithm with the inclusion of pruning states which are already \'expired\'', is_assigned_reviewers: false, is_vetoed: false, is_decided: false, avatar: File.open(Rails.root + "app/assets/test_uploads/test.pdf"))
+proposal.submission_period = SubmissionPeriod.create!(start_votation: DateTime.parse("22th Jan 2018 8:00:00 PM"), end_votation: DateTime.parse("20th Mar 2017 8:00:00 PM"), is_set: true, is_active_votation: true)
 
 user = User.create!(first_name: 'Isabel', last_name: 'Lawrence', department: 'CS', rank: 'Professor', contact_number: '9333867460', email: 'ilawrence@up.edu.ph', password: "260720")
 user.researcher.save!
@@ -60,7 +61,6 @@ user.dean.save!
 Announcement.create!(title: 'Submission Period has now begun!', body: 'Submit all necessary requirements to proceed.')
 Announcement.create!(title: 'Approved proposals are now available!', body: 'Check the status of your proposal using your FRIA account.')
 
-User.create!(first_name: 'Kat', last_name: 'Hernandez', department: 'CS', rank: 'Professor', contact_number: '9123656512', email: 'khernandez@up.edu.ph', password: '523123')
 User.create!(first_name: 'Nelson', last_name: 'Dixon', department: 'ME', rank: 'Professor', contact_number: '9123656523', email: 'ndixon@up.edu.ph', password: '124333')
 User.create!(first_name: 'Earl', last_name: 'Cross', department: 'Che', rank: 'Professor', contact_number: '9123656523', email: 'ecross@up.edu.ph', password: '992141')
 User.create!(first_name: 'Derrick', last_name: 'Brooks', department: 'EE', rank: 'Professor', contact_number: '9123656523', email: 'dbrooks@up.edu.ph', password: '192389')

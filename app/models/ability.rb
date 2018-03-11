@@ -29,50 +29,30 @@ class Ability
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
     if user
       if user.curr_type == 'Researcher'
-        can :index, Proposal, researcher_id: user.researcher.id
-        can :read, Proposal, researcher_id: user.researcher.id
-        can :create, Proposal
-        can :new, Proposal
-        can :edit, Proposal, researcher_id: user.researcher.id, is_decided: false 
-        can :update, Proposal, researcher_id: user.researcher.id, is_decided: false
-        can :destroy, Proposal, researcher_id: user.researcher.id, is_decided: false
+        can [:index, :read], Proposal, researcher_id: user.researcher.id
+        can [:create, :new], Proposal
+        can [:edit, :update, :destroy], Proposal do |proposal|
+          proposal.researcher_id == user.researcher.id
+          proposal.is_decided == false
+          proposal.submission_period.is_active_votation
+        end
       elsif user.curr_type == 'CommitteeMember'
-        can :index, Proposal, is_submitted: true
-        can :read, Proposal, is_submitted: true
-        can :review, Proposal, is_submitted: true
-
-        can :edit, Review, committee_member_id: user.committee_member.id
-        can :update, Review, committee_member_id: user.committee_member.id
-        can :index, Review, committee_member_id: user.committee_member.id
-        can :read, Review, committee_member_id: user.committee_member.id
+        can [:index, :read, :review], Proposal, is_submitted: true
+        can [:edit, :update, :index, :read], Review, committee_member_id: user.committee_member.id
       elsif user.curr_type == 'CommitteeHead'
-        can :index, Proposal, is_submitted: true
-        can :read, Proposal, is_submitted: true
-        can :review, Proposal, is_submitted: true
-
-        can :edit, Review, committee_head_id: user.committee_head.id
-        can :update, Review, committee_head_id: user.committee_head.id
-        can :index, Review, committee_head_id: user.committee_head.id
-        can :read, Review, committee_head_id: user.committee_head.id
-
-        can :update, SubmissionPeriod
-        can :edit, SubmissionPeriod
+        can [:index, :read, :review], Proposal, is_submitted: true
+        can [:edit, :update, :index, :read], Review, committee_head_id: user.committee_head.id
+        can [:update, :edit], SubmissionPeriod
       elsif user.curr_type == 'Dean'
-        can :index, Proposal
-        can :read, Proposal
-        can :index, Review
-        can :read, Review
+        can [:index, :read], Proposal
         can :review, Proposal
         can :veto, Proposal, is_decided: false
+        can :index, Review
+        can :read, Review
       elsif user.curr_type == 'Admin'
-        can :index, User
-        can :show, User
-        can :activate, User
-        can :deactivate, User
+        can [:index, :show, :activate, :deactivate], User
+        can [:index, :read, :assign], Proposal
         can :manage, Review
-        can :index, Proposal
-        can :read, Proposal
-        can :assign, Proposal
         can :manage, Announcement
       end
     end
