@@ -27,54 +27,54 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
+    if user
+      if user.curr_type == 'Researcher'
+        can :index, Proposal, researcher_id: user.researcher.id
+        can :read, Proposal, researcher_id: user.researcher.id
+        can :create, Proposal
+        can :new, Proposal
+        can :edit, Proposal, researcher_id: user.researcher.id, is_decided: false 
+        can :update, Proposal, researcher_id: user.researcher.id, is_decided: false
+        can :destroy, Proposal, researcher_id: user.researcher.id, is_decided: false
+      elsif user.curr_type == 'CommitteeMember'
+        can :index, Proposal, is_submitted: true
+        can :read, Proposal, is_submitted: true
+        can :review, Proposal, is_submitted: true
 
-    user ||= User.new
-    if user.curr_type == 'Researcher'
-      can :index, Proposal, researcher_id: user.researcher.id
-      can :read, Proposal, researcher_id: user.researcher.id
-      can :create, Proposal
-      can :new, Proposal
-      can :edit, Proposal, researcher_id: user.researcher.id, is_decided: false 
-      can :update, Proposal, researcher_id: user.researcher.id, is_decided: false
-      can :destroy, Proposal, researcher_id: user.researcher.id, is_decided: false
-    elsif user.curr_type == 'CommitteeMember'
-      can :index, Proposal, is_submitted: true
-      can :read, Proposal, is_submitted: true
-      can :review, Proposal, is_submitted: true
+        can :edit, Review, committee_member_id: user.committee_member.id
+        can :update, Review, committee_member_id: user.committee_member.id
+        can :index, Review, committee_member_id: user.committee_member.id
+        can :read, Review, committee_member_id: user.committee_member.id
+      elsif user.curr_type == 'CommitteeHead'
+        can :index, Proposal, is_submitted: true
+        can :read, Proposal, is_submitted: true
+        can :review, Proposal, is_submitted: true
 
-      can :edit, Review, committee_member_id: user.committee_member.id
-      can :update, Review, committee_member_id: user.committee_member.id
-      can :index, Review, committee_member_id: user.committee_member.id
-      can :read, Review, committee_member_id: user.committee_member.id
-    elsif user.curr_type == 'CommitteeHead'
-      can :index, Proposal, is_submitted: true
-      can :read, Proposal, is_submitted: true
-      can :review, Proposal, is_submitted: true
+        can :edit, Review, committee_head_id: user.committee_head.id
+        can :update, Review, committee_head_id: user.committee_head.id
+        can :index, Review, committee_head_id: user.committee_head.id
+        can :read, Review, committee_head_id: user.committee_head.id
 
-      can :edit, Review, committee_head_id: user.committee_head.id
-      can :update, Review, committee_head_id: user.committee_head.id
-      can :index, Review, committee_head_id: user.committee_head.id
-      can :read, Review, committee_head_id: user.committee_head.id
-
-      can :update, SubmissionPeriod
-      can :edit, SubmissionPeriod
-    elsif user.curr_type == 'Dean'
-      can :index, Proposal
-      can :read, Proposal
-      can :index, Review
-      can :read, Review
-      can :review, Proposal
-      can :veto, Proposal, is_decided: false
-    elsif user.curr_type == 'Admin'
-      can :index, User
-      can :show, User
-      can :activate, User
-      can :deactivate, User
-      can :manage, Review
-      can :index, Proposal
-      can :read, Proposal
-      can :assign, Proposal
-      can :manage, Announcement
+        can :update, SubmissionPeriod
+        can :edit, SubmissionPeriod
+      elsif user.curr_type == 'Dean'
+        can :index, Proposal
+        can :read, Proposal
+        can :index, Review
+        can :read, Review
+        can :review, Proposal
+        can :veto, Proposal, is_decided: false
+      elsif user.curr_type == 'Admin'
+        can :index, User
+        can :show, User
+        can :activate, User
+        can :deactivate, User
+        can :manage, Review
+        can :index, Proposal
+        can :read, Proposal
+        can :assign, Proposal
+        can :manage, Announcement
+      end
     end
   end
 end
