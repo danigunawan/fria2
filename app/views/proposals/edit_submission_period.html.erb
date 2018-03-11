@@ -3,9 +3,9 @@
   <%= form_for edit_period_path, :method => :post do |f|%>
     <div class="well">
       <h2>Enter start of votation:</h2>
-      <%= f.datetime_field :start %><br>
+      <%= f.datetime_field :start, required: true%><br>
       <h2>Enter deadline of votation:</h2>
-      <%= f.datetime_field :deadline %><br>
+      <%= f.datetime_field :deadline, required: true%><br>
     </div>
     <br><%= f.submit "Submit", :class => "btn btn-primary" %>
     <%= link_to 'Back', proposals_path, :class => "btn btn-primary" %>
