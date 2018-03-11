@@ -28,7 +28,19 @@
     </div>
   <% else %>
     <div class = "welcome-main">
-    <a><%= link_to "Log in", new_user_session_path %></a>
+      <%= form_for(@user, :url => session_path(@user), :html => {class: "ui form", id: "login"}) do |f| %>
+        <div class="fields">
+          <div class="field">
+            <%= f.label :email %>
+            <%= f.email_field :email, autofocus: true, placeholder: "Email" , required: true%>
+          </div>
+          <div class="field">
+            <%= f.label :password %>
+            <%= f.password_field :password, autocomplete: "off", placeholder: "Password", required: true%>
+          </div>
+          <%= f.submit "Login", class: "ui button", id: "login_button" %>
+        </div>
+      <% end %>
     </div>
   <% end %>
 </nav>
