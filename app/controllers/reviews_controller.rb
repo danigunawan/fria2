@@ -20,8 +20,6 @@ class ReviewsController < ApplicationController
 				@canvote = true
 			end
 		end
-		
-
 	end
 
 	def new
@@ -73,13 +71,14 @@ class ReviewsController < ApplicationController
 		s = "/proposals/"
 		s << params[:id].to_s
 		s << "/reviews"
-		
+		puts '|',params,'|'
+		puts '+',@proposal,'+'
 		if current_user.curr_type == 'Dean'
-			@proposal.comments.create(comment: params[s][:content], dean_id: current_user.dean.id)
-		elsif current_user.curr_type == 'Committee Member'
-			@proposal.comments.create(comment: params[s][:content], committee_member_id: current_user.committee_member.id)
-		else current_user.curr_type == 'Committee Head'
-			@proposal.comments.create(comment: params[s][:content], committee_head_id: current_user.committee_head.id)
+			@proposal.comments.create!(comment: params[:content], dean_id: current_user.dean.id)
+		elsif current_user.curr_type == 'CommitteeMember'
+			@proposal.comments.create!(comment: params[:content], committee_member_id: current_user.committee_member.id)
+		else current_user.curr_type == 'CommitteeHead'
+			@proposal.comments.create!(comment: params[:content], committee_head_id: current_user.committee_head.id)
 		end
 
 		# @proposal.comments.save!

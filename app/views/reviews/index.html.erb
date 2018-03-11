@@ -56,27 +56,36 @@
     <% if comment.dean_id.nil? and comment.committee_member_id.nil? %>
         <% @head = CommitteeHead.find(comment.committee_head_id) %>
         <% @user =  User.find(@head.user_id) %>
-        <%= @user.full_name %>
+        <b>
+            <%= @user.full_name %>
+        </b>
     <% elsif comment.committee_head_id.nil? and comment.committee_member_id.nil? %>
         <% @head = Dean.find(comment.dean_id) %>
         <% @user =  User.find(@head.user_id) %>
-        <%= @user.full_name %>
+        <b>
+            <%= @user.full_name %>
+        </b>
     <% else %>
         <% @head = CommitteeMember.find(comment.committee_member_id) %>
         <% @user =  User.find(@head.user_id) %>
-        <%= @user.full_name %>
+        <b>
+            <%= @user.full_name %>
+        </b>
     <%end%>
     :
     <%= comment.comment %>
     <br>
 <% end %>
 
+<h2> Add new comment </h2>
+
 <%= form_for add_comment_path, :method => :post do |f| %>
-    <p>
-    <%= f.label :content, "New Comment" %><br/>
-    <%= f.text_area :content %>
-    </p>
-    <p><%= f.submit "Add Comment"%></p>
+    <div class="field">
+        <div class="ui icon input">
+            <input type="text" name="content" placeholder="Comment">
+        </div>
+    </div>
+    <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1" />
 <% end %>
 
 <% if can? :veto, @proposal %>
