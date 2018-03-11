@@ -22,7 +22,7 @@ class Proposal < ApplicationRecord
 	 	self.is_decided = false if self.is_decided.nil?
 	 	self.is_assigned_reviewers = false if self.is_assigned_reviewers.nil?
 	 	self.is_submitted = false if self.is_submitted.nil?
-	 	self.create_submission_period!() if self.submission_period.nil?
+	 	self.create_submission_period!(proposal_id: self.id) if self.submission_period.nil?
 	 	self.is_submitted = self.avatar.nil? ? false : true
 	 end
 end

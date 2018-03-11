@@ -3,6 +3,12 @@
   <%= form_for @proposal, html: { multipart: true } do |f| %>
     <%= f.label :title %>
     <%= f.text_field :title %>
+    <br><br><%= f.label :Objectives %>
+    <%= f.text_area :objectives%>
+    <br><br><%= f.label :Description %>
+    <%= f.text_area :descriptions%>
+    <br><br><%= f.label :Coresearchers %>
+    <%= f.text_field :coresearchers%>
     <br><br><%= f.label 'File' %>
     <%= f.file_field :avatar, accept: '.pdf' %>
     <%= f.submit "Save", :class => "btn btn-primary" %>

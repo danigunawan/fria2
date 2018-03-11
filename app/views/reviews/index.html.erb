@@ -23,7 +23,6 @@
 
 <% @reviews.each do |review| %>
       <tr>
-        <td><%= review.comment %></td>
         <td>
             <% if review.is_decided %>
                 <% if review.vote == 1 %>
@@ -52,21 +51,36 @@
       </tr>
 <% end %>
 </table>
-<!-- <h2>Comments</h2>
+<h2>Comments</h2>
 <% @proposal.comments.each do |comment| %>
-    <%= comment %>
+    <% if comment.dean_id.nil? and comment.committee_member_id.nil? %>
+        <% @head = CommitteeHead.find(comment.committee_head_id) %>
+        <% @user =  User.find(@head.user_id) %>
+        <%= @user.full_name %>
+    <% elsif comment.committee_head_id.nil? and comment.committee_member_id.nil? %>
+        <% @head = Dean.find(comment.dean_id) %>
+        <% @user =  User.find(@head.user_id) %>
+        <%= @user.full_name %>
+    <% else %>
+        <% @head = CommitteeMember.find(comment.committee_member_id) %>
+        <% @user =  User.find(@head.user_id) %>
+        <%= @user.full_name %>
+    <%end%>
+    :
+    <%= comment.comment %>
+    <br>
 <% end %>
 
-<%= form_for @comment, :remote => true do |f| %>
+<%= form_for add_comment_path, :method => :post do |f| %>
     <p>
-    <%= f.label :comment, "New Comment" %><br/>
-    <%= f.text_area :comment %>
+    <%= f.label :content, "New Comment" %><br/>
+    <%= f.text_area :content %>
     </p>
     <p><%= f.submit "Add Comment"%></p>
-<% end %> -->
+<% end %>
 
 <% if can? :veto, @proposal %>
-    <%= link_to "Uphold", veto_path(@proposal.id), :class => "btn btn-primary" %>
+    <%= link_to "Uphold", uphold_path(@proposal.id), :class => "btn btn-primary", :method => :post %>
     <%= link_to "Veto", veto_path(@proposal.id), :class => "btn btn-primary" %>
 <% end %>
 <%= link_to 'Back', proposals_path, :class => "btn btn-primary" %>

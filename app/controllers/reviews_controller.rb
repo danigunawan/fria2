@@ -68,9 +68,31 @@ class ReviewsController < ApplicationController
 		end
 	end
 
+	def add_comment
+		@proposal = Proposal.find(params[:id])
+		s = "/proposals/"
+		s << params[:id].to_s
+		s << "/reviews"
+		
+		if current_user.curr_type == 'Dean'
+			@proposal.comments.create(comment: params[s][:content], dean_id: current_user.dean.id)
+		elsif current_user.curr_type == 'Committee Member'
+			@proposal.comments.create(comment: params[s][:content], committee_member_id: current_user.committee_member.id)
+		else current_user.curr_type == 'Committee Head'
+			@proposal.comments.create(comment: params[s][:content], committee_head_id: current_user.committee_head.id)
+		end
+
+		# @proposal.comments.save!
+		@proposal.save!
+
+		redirect_to reviews_page_path
+	end
+
+	
+
 	private 
 
 	def review_params
-      params.require(:review).permit(:comment,:vote)		
+      params.require(:review).permit(:vote)		
 	end
 end
