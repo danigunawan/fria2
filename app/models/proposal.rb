@@ -1,6 +1,8 @@
 class Proposal < ApplicationRecord
 	validates :title, presence: true
 	validates :researcher, presence: true
+	validates :descriptions, presence: true
+	validates :avatar, presence: true
 
 	belongs_to :researcher, optional: true
 	after_initialize :set_defaults

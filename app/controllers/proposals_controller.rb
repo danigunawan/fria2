@@ -180,12 +180,6 @@ class ProposalsController < ApplicationController
 	def edit_submission_period
 		@proposal = Proposal.find(params[:id])
 		authorize! :edit, SubmissionPeriod
-		# @submission_period = @proposal.submission_period
-		# puts "+++++"
-		# puts @proposal.submission_period.is_set
-		# puts "+++++"
-
-		# @proposal.save!
 	end
 
 	def edit_period
