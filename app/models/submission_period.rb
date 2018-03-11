@@ -9,6 +9,8 @@ class SubmissionPeriod < ApplicationRecord
 	end
 
 	def set_is_active_votation
-		self.is_active_votation = true if Time.now >= self.start_votation and Time.now <= self.end_votation
+		if self.is_set
+			self.is_active_votation = true if Time.now >= self.start_votation and Time.now <= self.end_votation
+		end
 	end
 end

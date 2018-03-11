@@ -1,32 +1,77 @@
 <h1>Account Privileges: <%= @user.full_name %></h1>
 <div class="well">
-<table class = "table">
-  <tr>
-  <td>Dean
-  <% if @user.dean.activated == true %> <td><%= link_to "Remove Privilege", remove_dean_path(:id => @user.id), :method => :post %>
-  <% else %> <td><%= link_to "Add Privilege", add_dean_path(:id => @user.id), :method => :post %>  <% end %>
-  </tr>
-  <tr>
-  <td>Researcher
-  <% if @user.researcher.activated == true %> <td><%= link_to "Remove Privilege", remove_researcher_path(:id => @user.id), :method => :post %>
-  <% else %> <td><%= link_to "Add Privilege", add_researcher_path(:id => @user.id), :method => :post %>  <% end %>
-  </tr>
-  <tr>
-  <td>Committee Member
-  <% if @user.committee_member.activated == true %> <td><%= link_to "Remove Privilege", remove_committee_member_path(:id => @user.id), :method => :post %>
-  <% else %> <td><%= link_to "Add Privilege", add_committee_member_path(:id => @user.id), :method => :post %>  <% end %>
-  </tr>
-  <tr>
-  <td>Committee Head
-  <% if @user.committee_head.activated == true %> <td><%= link_to "Remove Privilege", remove_committee_head_path(:id => @user.id), :method => :post %>
-  <% else %> <td><%= link_to "Add Privilege", add_committee_head_path(:id => @user.id), :method => :post %>  <% end %>
-  </tr>
-  <tr>
-  <td>Admin
-  <% if @user.admin.activated == true %> <td><%= link_to "Remove Privilege", remove_admin_path(:id => @user.id), :method => :post %>
-  <% else %> <td><%= link_to "Add Privilege", add_admin_path(:id => @user.id), :method => :post %>  <% end %>
-  </tr>
-</table>
+  <table class = "table">
+    <tr>
+      <td>
+        Dean
+      </td>
+      <% if @user.dean.activated == true %> 
+        <td>
+          <%= link_to "Remove Privilege", remove_dean_path(:id => @user.id), :method => :post %>
+        </td>
+      <% else %> 
+        <td>
+          <%= link_to "Add Privilege", add_dean_path(:id => @user.id), :method => :post %>
+        </td>
+      <% end %>
+    </tr>
+    <tr>
+      <td>
+        Researcher
+      </td>
+      <% if @user.researcher.activated == true %>
+        <td>
+          <%= link_to "Remove Privilege", remove_researcher_path(:id => @user.id), :method => :post %>
+        </td>
+      <% else %>
+        <td>
+          <%= link_to "Add Privilege", add_researcher_path(:id => @user.id), :method => :post %>
+        </td>
+      <% end %>
+    </tr>
+    <tr>
+      <td>
+        Committee Member
+      </td>
+      <% if @user.committee_member.activated == true %>
+        <td>
+          <%= link_to "Remove Privilege", remove_committee_member_path(:id => @user.id), :method => :post %>
+        </td>
+      <% else %>
+        <td>
+          <%= link_to "Add Privilege", add_committee_member_path(:id => @user.id), :method => :post %> 
+        </td>
+      <% end %>
+    </tr>
+    <tr>
+      <td>
+        Committee Head
+      </td>
+      <% if @user.committee_head.activated == true %>
+        <td>
+          <%= link_to "Remove Privilege", remove_committee_head_path(:id => @user.id), :method => :post %>
+        </td>
+      <% else %>
+        <td>
+          <%= link_to "Add Privilege", add_committee_head_path(:id => @user.id), :method => :post %>
+        </td>
+      <% end %>
+      </tr>
+      <tr>
+      <td>
+        Admin
+      </td>
+      <% if @user.admin.activated == true %>
+        <td>
+          <%= link_to "Remove Privilege", remove_admin_path(:id => @user.id), :method => :post %>
+        </td>
+      <% else %>
+        <td>
+          <%= link_to "Add Privilege", add_admin_path(:id => @user.id), :method => :post %>
+        </td>
+      <% end %>
+    </tr>
+  </table>
 </div>
 <br>
 <%= link_to 'Back', assign_account_path, :class => "btn btn-primary" %>
