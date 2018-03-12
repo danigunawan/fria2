@@ -5,6 +5,17 @@ Researcher: <%= User.find(id = @proposal.researcher.user_id).full_name %><br>
 Co-researchers: <%= @proposal.coresearchers %><br>
 Objectives: <%= @proposal.objectives %><br>
 Description: <%= @proposal.descriptions %><br>
+<% if @proposal.is_decided %>
+	<% if @proposal.status == 1 %>
+		Status: Accepted
+	<% end %>
+	<% if @proposal.status == -1 %>
+		Status: Rejected
+	<% end %> 
+	<% if @proposal.status == 0 %>
+		Status: For Resubmission
+	<% end %> 
+<% end %>
 </div>
 <br>
 <% if can? :read, @proposal %>
@@ -15,13 +26,11 @@ Description: <%= @proposal.descriptions %><br>
 	</td>
 <% end %>
 <% if can? :update, @proposal %>
+<% if (@proposal.submission_period.is_active_votation == false) %>
 	<%= link_to 'Edit', edit_proposal_path(@proposal), :class => "btn btn-primary" %>
+<% end %>
 <% end %>
 <% if can? :review, @proposal %>
 	<%= link_to "See Reviews", reviews_page_path(@proposal.id), :class => "btn btn-primary"%>
-<% end %>
-<% if can? :veto, @proposal %>
-		<%= link_to "Uphold", veto_path(@proposal.id), :class => "btn btn-primary" %>
-    <%= link_to "Veto", veto_path(@proposal.id), :class => "btn btn-primary" %>
 <% end %>
 <%= link_to 'Back', proposals_path, :class => "btn btn-primary" %>

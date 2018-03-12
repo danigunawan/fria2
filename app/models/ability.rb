@@ -34,7 +34,7 @@ class Ability
         can [:edit, :update, :destroy], Proposal do |proposal|
           proposal.researcher_id == user.researcher.id
           proposal.is_decided == false
-          proposal.submission_period.is_active_votation
+          proposal.submission_period.is_active_votation == false
         end
       elsif user.curr_type == 'CommitteeMember'
         can [:index, :read, :review], Proposal, is_submitted: true

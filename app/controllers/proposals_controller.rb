@@ -26,11 +26,14 @@ class ProposalsController < ApplicationController
 				@proposals = Proposal.accessible_by(current_ability).order('id DESC')
 			end
 		end
+
+
 	end
 
 	def show
 		@proposal = Proposal.find(params[:id])
 		authorize! :read, @proposal
+
 	end
 
 	def edit
@@ -72,8 +75,16 @@ class ProposalsController < ApplicationController
 		s = "/proposals/"
 		s << params[:id].to_s
 		s << "/veto"
-		@proposal.status = params[s][:vote]
-		@proposal.is_decided = 1
+		if params[s][:vote] == '0'
+			@proposal.submission_period.start_votation = nil
+			@proposal.submission_period.end_votation = nil
+			@proposal.submission_period.is_set = false
+			@proposal.submission_period.is_active_votation = false
+		else
+			@proposal.status = params[s][:vote]
+			@proposal.is_decided = 1
+		end
+		@proposal.submission_period.save!
 		@proposal.save!
 		redirect_to proposals_page_path
 	end
@@ -83,10 +94,17 @@ class ProposalsController < ApplicationController
 		@reviews = @proposal.reviews
 		@reviews.each do |review|
 			if review.committee_member_id.nil?
-				@proposal.status = review.vote
-				@proposal.is_decided = 1
+				if review.vote == 0
+					proposal.submission_period.start_votation = nil
+					@proposal.submission_period.end_votation = nil
+					@proposal.submission_period.is_set = false
+				else
+					@proposal.status = review.vote
+					@proposal.is_decided = 1
+				end
 			end
 		end
+		@proposal.submission_period.save!
 		@proposal.save!
 
 		redirect_to reviews_page_path
