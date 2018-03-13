@@ -27,6 +27,7 @@
       | <%= link_to "LOG OUT", destroy_user_session_path, :method => :delete, data: { confirm: 'Are you sure?' } %>
     </div>
   <% else %>
+    <%= link_to "Log in", new_user_session_path, :class => "btn btn-primary" %>
   <!-- 
     <div class = "welcome-main">
       <%= form_for(@user, :url => session_path(@user), :html => {class: "ui form", id: "login"}) do |f| %>
