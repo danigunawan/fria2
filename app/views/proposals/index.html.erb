@@ -2,7 +2,7 @@
 
 <table class = "table">
 <% if can? :create, Proposal %>
-    <%= link_to "New Proposal", new_proposal_path, :class => "btn btn-primary" %>
+    <%= link_to "New Proposal", new_proposal_path, :class => "ui primary button" %>
 <% end %>
 <% @proposals.each do |proposal| %>
       <tr>

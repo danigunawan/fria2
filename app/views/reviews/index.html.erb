@@ -10,16 +10,16 @@
 <% if can? :update, @my_review %>
     <% if @canvote %>
         <% if @my_review.is_decided %>
-            <%= link_to "Update my review", edit_review_path(:reviewid=>@my_review.id, :proposalid=>@proposal.id), :class => "btn btn-primary" %>
+            <%= link_to "Update my review", edit_review_path(:reviewid=>@my_review.id, :proposalid=>@proposal.id), :class => "ui primary button" %>
         <% else %>
-            <%= link_to "Review", edit_review_path(:reviewid=>@my_review.id, :proposalid=>@proposal.id), :class => "btn btn-primary" %>
+            <%= link_to "Review", edit_review_path(:reviewid=>@my_review.id, :proposalid=>@proposal.id), :class => "ui primary button" %>
         <% end %>
     <% else %> Voting is closed
     <% end %>
 <% end %>
 <table class = "table">
 <thead><h2>Reviews</h2></thead>
-<%#= link_to "New review", new_review_path(:id=>@proposal.id), :class => "btn btn-primary" %>
+<%#= link_to "New review", new_review_path(:id=>@proposal.id), :class => "ui primary button" %>
 <% @count = 0 %>
 <% @reviews.each do |review| %>
       <tr>
@@ -91,8 +91,8 @@
 
 <% if can? :veto, @proposal %>
 <% if @count == 3 and @proposal.submission_period.is_active_votation %>
-    <%= link_to "Uphold", uphold_path(@proposal.id), :class => "btn btn-primary", :method => :post %>
-    <%= link_to "Veto", veto_path(@proposal.id), :class => "btn btn-primary" %>
+    <%= link_to "Uphold", uphold_path(@proposal.id), :class => "ui primary button", :method => :post %>
+    <%= link_to "Veto", veto_path(@proposal.id), :class => "ui primary button" %>
 <% end %>
 <% end %>
-<%= link_to 'Back', proposals_path, :class => "btn btn-primary" %>
+<%= link_to 'Back', proposals_path, :class => "ui primary button" %>

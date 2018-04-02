@@ -21,16 +21,16 @@ Description: <%= @proposal.descriptions %><br>
 <% if can? :read, @proposal %>
 	<td>
 		<% if @proposal.avatar_url %>
-			<%= link_to "Download proposal", @proposal.avatar_url, :class => "btn btn-primary" %>
+			<%= link_to "Download proposal", @proposal.avatar_url, :class => "ui primary button" %>
 		<% end %>
 	</td>
 <% end %>
 <% if can? :update, @proposal %>
 <% if (@proposal.submission_period.is_active_votation == false) %>
-	<%= link_to 'Edit', edit_proposal_path(@proposal), :class => "btn btn-primary" %>
+	<%= link_to 'Edit', edit_proposal_path(@proposal), :class => "ui primary button" %>
 <% end %>
 <% end %>
 <% if can? :review, @proposal %>
-	<%= link_to "See Reviews", reviews_page_path(@proposal.id), :class => "btn btn-primary"%>
+	<%= link_to "See Reviews", reviews_page_path(@proposal.id), :class => "ui primary button"%>
 <% end %>
-<%= link_to 'Back', proposals_path, :class => "btn btn-primary" %>
+<%= link_to 'Back', proposals_path, :class => "ui primary button" %>
