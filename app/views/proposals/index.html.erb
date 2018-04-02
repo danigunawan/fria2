@@ -1,88 +1,73 @@
 <h1>Proposals</h1>
 
-<table class = "table">
 <% if can? :create, Proposal %>
     <%= link_to "New Proposal", new_proposal_path, :class => "ui primary button" %>
 <% end %>
-<% @proposals.each do |proposal| %>
-      <tr>
-	      <% if can? :read, proposal %>
-	      	<td>
-				<%= link_to proposal.title, proposal_url(proposal.id) %>
-			</td>
-		<% else %>
-			<td>
-				<%= proposal.title %>
-			</td>
-		<% end %>
-        <% if can? :update, proposal %>
-	        <td>
-	        	<%= link_to "Update", edit_proposal_path(proposal.id) %>
-	        </td>
-	    <% end %>
-	    <% if can? :destroy, proposal %>
-        	<td>
-                <%= link_to "Delete",  proposal, method: :delete, data: { confirm: 'Are you sure?'} %>
-        	</td>
-        <% end %>
-        <% if can? :review, proposal %>
-        	<td>
-                <%= link_to "See reviews", reviews_page_path(proposal.id) %>
-        	</td>
-        <% end %>
-        <% if can? :assign, proposal %>
-            <td>
+
+<div class="ui segments">
+  <div class="ui segment">
+    <div class="ui divided items">
+      <% @proposals.each do |proposal| %>
+        <div class="item">
+          <div class="content">
+            <% if can? :read, proposal %>
+          	  <%= link_to proposal.title, proposal_url(proposal.id), :class => "header" %>
+          	<% else %>
+          		<h1 class="ui medium header"><%= proposal.title %></hi>
+          	<% end %>
+            <div class="extra">
+              <% if can? :destroy, proposal %>
+                <%= link_to "Delete",  proposal, method: :delete, data: { confirm: 'Are you sure?'}, :class => "ui right floated primary button" %>
+              <% end %>
+              <% if can? :update, proposal %>
+                <%= link_to "Update", edit_proposal_path(proposal.id), :class => "ui right floated primary button" %>
+            	<% end %>
+              <% if can? :review, proposal %>
+                <%= link_to "See reviews", reviews_page_path(proposal.id), :class => "ui right floated primary button" %>
+              <% end %>
+              <% if can? :assign, proposal %>
                 <% if proposal.is_assigned_reviewers %>
-                    Assigned
+                  <div class="ui label">Assigned</div>
                 <% else %>
-                    Not Yet Assigned
+                  <div class="ui label">Not Yet Assigned</div>
                 <% end %>
-            </td>
-            <td>
                 <% if proposal.is_assigned_reviewers %>
-                    <%= link_to "Reassign", assign_proposal_path(proposal.id) %>
+                  <%= link_to "Reassign", assign_proposal_path(proposal.id), :class => "ui right floated primary button" %>
                 <% else %>
-                    <%= link_to "Assign", assign_proposal_path(proposal.id) %>
+                  <%= link_to "Assign", assign_proposal_path(proposal.id), :class => "ui right floated primary button" %>
                 <% end %>
-            </td>
-            <td>
                 <% if proposal.is_vetoed %>
-                  Vetoed
+                  <div class="ui label">Vetoed</div>
                 <% end %>
-            </td>
-        <% end %>
-        <% if can? :review, proposal %>
-            <% if proposal.submission_period.is_set == false%>
-                <% if can? :update, proposal.submission_period %>
-                    <td>
-                        <%= link_to "Set proposal timeline", edit_submission_period_path(proposal.id) %>
-                    </td>
+              <% end %>
+              <% if can? :review, proposal %>
+                <% if proposal.submission_period.is_set == false%>
+                  <% if can? :update, proposal.submission_period %>
+                    <%= link_to "Set proposal timeline", edit_submission_period_path(proposal.id), :class => "ui right floated primary button" %>
+                  <% end %>
+                <% else %>
+                  <% if can? :update, proposal.submission_period %>
+                    <%= link_to "Update proposal timeline", edit_submission_period_path(proposal.id), :class => "ui right floated primary button" %>
+                  <% end %>
+                  <% if current_user.curr_type == 'CommitteeMember' %>
+                    <% if !Review.find_by('committee_member_id = ? AND proposal_id = ?', current_user.committee_member.id, proposal.id).is_decided %>
+                      <div class="ui label">Not yet voted</div>
+                    <% else %>
+                      <div class="ui label">Voted</div>
+                    <% end %>
+                  <% elsif current_user.curr_type == 'CommitteeHead' %>
+                    <% if !Review.find_by('committee_head_id = ? AND proposal_id = ?', current_user.committee_head.id, proposal.id).is_decided %>
+                      <div class="ui label">Not yet voted</div>
+                    <% else %>
+                      <div class="ui label">Voted</div>
+                    <% end %>
+                  <% end %>
                 <% end %>
-            <% else %>
-                <% if can? :update, proposal.submission_period %>
-                    <td>
-                        <%= link_to "Update proposal timeline", edit_submission_period_path(proposal.id) %>
-                    </td>
-                <% end %>
-                <% if current_user.curr_type == 'CommitteeMember' %>
-                    <td>
-                        <% if !Review.find_by('committee_member_id = ? AND proposal_id = ?', current_user.committee_member.id, proposal.id).is_decided %>
-                            Not yet voted
-                        <% else %>
-                            Voted
-                        <% end %>
-                    </td>
-                <% elsif current_user.curr_type == 'CommitteeHead' %>
-                    <td>
-                        <% if !Review.find_by('committee_head_id = ? AND proposal_id = ?', current_user.committee_head.id, proposal.id).is_decided %>
-                            Not yet voted
-                        <% else %>
-                            Voted
-                        <% end %>
-                    </td>
-                <% end %>
-            <% end %>
-        <% end %>
-      </tr>
-<% end %>
-</table>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
