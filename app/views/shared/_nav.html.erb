@@ -2,8 +2,7 @@
   <a class = "navbar-brand"><%= link_to image_tag("fria-logo.png", :width => 180), home_page_path %></a>
   <div class = "welcome">
   <% if user_signed_in? %>
-    Signed in as <%= current_user.email %>. Not you?
-    <%= link_to "Sign out", destroy_user_session_path, :method => :delete, data: { confirm: 'Are you sure?' }%>
+    Signed in as <%= current_user.email %>
   <% end %>
   </div>
   <% if user_signed_in? %>
@@ -28,9 +27,9 @@
     </div>
   <% else %>
     <div class = "welcome-main">
-      <%= link_to "Log in", new_user_session_path, :class => "btn btn-primary" %>
+      <%= link_to "Log in", new_user_session_path %>
     </div>
-  <!-- 
+  <!--
     <div class = "welcome-main">
       <%= form_for(@user, :url => session_path(@user), :html => {class: "ui form", id: "login"}) do |f| %>
         <div class="fields">

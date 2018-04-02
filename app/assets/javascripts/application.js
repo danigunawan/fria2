@@ -16,4 +16,5 @@
 //= require bootstrap-sprockets
 //= require moment
 //= require bootstrap-datetimepicker
+//= require semantic_ui/semantic_ui
 //= require_tree .
