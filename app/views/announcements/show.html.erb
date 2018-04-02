@@ -12,5 +12,5 @@
   <%= @announcement.body %>
 </p>
 
-<%= link_to 'Edit', edit_announcement_path(@announcement) %> |
-<%= link_to 'Back', announcements_path %>
+<%= link_to 'Edit', edit_announcement_path(@announcement), :class => "ui primary button" %>
+<%= link_to 'Back', announcements_path, :class => "ui primary button" %>
