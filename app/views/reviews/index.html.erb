@@ -1,11 +1,13 @@
 <h1>Review Proposal</h1>
-<div class="well">
-  Title: <%= @proposal.title %><br>
-  Researcher: <%= User.find(id = @proposal.researcher.user_id).full_name %><br>
-  Co-researchers: <%= @proposal.coresearchers %><br>
-  Objectives: <%= @proposal.objectives %><br>
-  Description: <%= @proposal.descriptions %>
-</div>
+<table class="ui celled padded table">
+	<tbody>
+		<tr><th>Title</th><td><%= @proposal.title %></td></tr>
+		<tr><th>Researcher</th><td><%= User.find(id = @proposal.researcher.user_id).full_name %></td></tr>
+		<tr><th>Co-researchers</th><td><%= @proposal.coresearchers %></td></tr>
+		<tr><th>Objectives</th><td><%= @proposal.objectives %></td></tr>
+		<tr><th>Description</th><td><%= @proposal.descriptions %></td></tr>
+	</tbody>
+</table>
 <br>
 <% if can? :update, @my_review %>
     <% if @canvote %>
