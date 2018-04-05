@@ -1,0 +1,2 @@
+class Coresearcher < ApplicationRecord
+end

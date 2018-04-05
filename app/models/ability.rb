@@ -37,18 +37,17 @@ class Ability
           proposal.submission_period.is_active_votation == false
         end
       elsif user.curr_type == 'CommitteeMember'
-        can [:index, :read, :review], Proposal, is_submitted: true
+        can [:index, :read, :review, :comment], Proposal, is_submitted: true
         can [:edit, :update, :index, :read], Review, committee_member_id: user.committee_member.id
       elsif user.curr_type == 'CommitteeHead'
-        can [:index, :read, :review], Proposal, is_submitted: true
+        can [:index, :read, :review, :comment], Proposal, is_submitted: true
         can [:edit, :update, :index, :read], Review, committee_head_id: user.committee_head.id
         can [:update, :edit], SubmissionPeriod
       elsif user.curr_type == 'Dean'
-        can [:index, :read], Proposal
+        can [:index, :read, :comment], Proposal, is_submitted: true
         can :review, Proposal
         can :veto, Proposal, is_decided: false
-        can :index, Review
-        can :read, Review
+        can [:index, :read], Review
       elsif user.curr_type == 'Admin'
         can [:index, :show, :activate, :deactivate], User
         can [:index, :read, :assign], Proposal
