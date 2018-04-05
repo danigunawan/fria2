@@ -27,7 +27,6 @@ class ProposalsController < ApplicationController
 			end
 		end
 
-
 	end
 
 	def show

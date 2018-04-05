@@ -1,22 +1,24 @@
-<h1> Vetoing: <%= @proposal.title %> </h1>
-<%= form_for vetoed_path, :method => :post do |f| %>
-  <div class="well">
-    <br><br>
-    <% if @headreview.vote != 1 %>
-    	<%= f.radio_button :vote,'1'%>
-    	<%= f.label :vote, 'Accept'%>
-    	<br>
-    <%end%>
-    <% if @headreview.vote != -1 %>
-	    <%= f.radio_button :vote,'-1'%>
-	    <%= f.label :vote, 'Reject'%>
-	    <br>
-    <%end%>
-    <% if @headreview.vote != 0 %>
-	    <%= f.radio_button :vote,'0'%>
-	    <%= f.label :vote, 'Resubmit'%>
-    <%end%>
-  </div>
-  <br>
-  <%= f.submit "Save", :class => "btn btn-primary" %>
+<% if can :veto, @proposal %>
+  <h1> Vetoing: <%= @proposal.title %> </h1>
+  <%= form_for vetoed_path, :method => :post do |f| %>
+    <div class="well">
+      <br><br>
+      <% if @headreview.vote != 1 %>
+      	<%= f.radio_button :vote,'1'%>
+      	<%= f.label :vote, 'Accept'%>
+      	<br>
+      <%end%>
+      <% if @headreview.vote != -1 %>
+  	    <%= f.radio_button :vote,'-1'%>
+  	    <%= f.label :vote, 'Reject'%>
+  	    <br>
+      <%end%>
+      <% if @headreview.vote != 0 %>
+  	    <%= f.radio_button :vote,'0'%>
+  	    <%= f.label :vote, 'Resubmit'%>
+      <%end%>
+    </div>
+    <br>
+    <%= f.submit "Save", :class => "btn btn-primary" %>
+  <% end %>
 <% end %>
