@@ -59,7 +59,7 @@ class Ability
           proposal.is_decided == false or proposal.status == 2 or proposal.status == 3
         end
         can [:index, :read], Review do |proposal|
-          prposal.status == 0 or proposal.status == 1
+          proposal.status == 0 or proposal.status == 1
         end
       elsif user.curr_type == 'Admin'
         can [:index, :show, :activate, :deactivate], User
