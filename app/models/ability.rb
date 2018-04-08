@@ -39,18 +39,28 @@ class Ability
         end
       elsif user.curr_type == 'CommitteeMember'
         can [:index, :read, :comment], Proposal
-        can :review, Proposal, status: 0 or status: 1
+        can :review, Proposal do |models|
+          models.status == 0 or models.status == 1
+        end
         can [:edit, :update, :index, :read], Review, committee_member_id: user.committee_member.id
       elsif user.curr_type == 'CommitteeHead'
         can [:index, :read, :comment], Proposal
-        can :review, Proposal, status: 0 or status: 1
+        can :review, Proposal do |models|
+          models.status == 0 or models.status == 1
+        end
         can [:edit, :update, :index, :read], Review, committee_head_id: user.committee_head.id
         can [:update, :edit], SubmissionPeriod
       elsif user.curr_type == 'Dean'
         can [:index, :read, :comment], Proposal
-        can :review, Proposal, status: 0 or status: 1
-        can :veto, Proposal, is_decided: false or status: 2 or status: 3
-        can [:index, :read], Review, status: 0 or status: 1
+        can :review, Proposal do |models|
+          models.status == 0 or models.status == 1
+        end
+        can :veto, Proposal do |proposal|
+          proposal.is_decided == false or proposal.status == 2 or proposal.status == 3
+        end
+        can [:index, :read], Review do |models|
+          models.status == 0 or models.status == 1
+        end
       elsif user.curr_type == 'Admin'
         can [:index, :show, :activate, :deactivate], User
         can [:index, :read, :assign], Proposal

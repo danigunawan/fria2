@@ -11,6 +11,24 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 	end
 
+	def edit_profile
+		@user = current_user
+	end
+
+	def edited_profile
+		@user = User.find(params[:id])
+		if @user.update_with_password(user_params)
+      # Sign in the user by passing validation in case their password changed
+      		bypass_sign_in(@user)
+      		redirect_to home_page_path
+
+      	else
+      		render "edit_profile"
+    	end
+
+
+	end
+
 	def add_dean
 		@user = User.find(params[:id])
 		@user.dean.activated = true
@@ -40,8 +58,6 @@ class UsersController < ApplicationController
 		@user.researcher.activated = true
 		@user.researcher.save!
 		@user.save!
-		puts "++++"
-		puts "++++"
 		redirect_to edit_account_path
 	end
 
@@ -93,5 +109,9 @@ class UsersController < ApplicationController
 		@user.admin.save!
 		@user.save!
 		redirect_to edit_account_path
+	end
+
+	def user_params
+		params.require(:user).permit(:first_name, :last_name, :department, :rank, :contact_number, :email, :password, :password_confirmation, :current_password)
 	end
 end
