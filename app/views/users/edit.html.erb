@@ -1,77 +1,88 @@
 <h1>Account Privileges: <%= @user.full_name %></h1>
-<div class="well">
-  <table class = "table">
-    <tr>
-      <td>
-        Dean
-      </td>
-      <% if @user.dean.activated == true %> 
-        <td>
-          <%= link_to "Remove Privilege", remove_dean_path(:id => @user.id), :method => :post %>
-        </td>
-      <% else %> 
-        <td>
-          <%= link_to "Add Privilege", add_dean_path(:id => @user.id), :method => :post %>
-        </td>
-      <% end %>
-    </tr>
-    <tr>
-      <td>
-        Researcher
-      </td>
-      <% if @user.researcher.activated == true %>
-        <td>
-          <%= link_to "Remove Privilege", remove_researcher_path(:id => @user.id), :method => :post %>
-        </td>
-      <% else %>
-        <td>
-          <%= link_to "Add Privilege", add_researcher_path(:id => @user.id), :method => :post %>
-        </td>
-      <% end %>
-    </tr>
-    <tr>
-      <td>
-        Committee Member
-      </td>
-      <% if @user.committee_member.activated == true %>
-        <td>
-          <%= link_to "Remove Privilege", remove_committee_member_path(:id => @user.id), :method => :post %>
-        </td>
-      <% else %>
-        <td>
-          <%= link_to "Add Privilege", add_committee_member_path(:id => @user.id), :method => :post %> 
-        </td>
-      <% end %>
-    </tr>
-    <tr>
-      <td>
-        Committee Head
-      </td>
-      <% if @user.committee_head.activated == true %>
-        <td>
-          <%= link_to "Remove Privilege", remove_committee_head_path(:id => @user.id), :method => :post %>
-        </td>
-      <% else %>
-        <td>
-          <%= link_to "Add Privilege", add_committee_head_path(:id => @user.id), :method => :post %>
-        </td>
-      <% end %>
-      </tr>
-      <tr>
-      <td>
-        Admin
-      </td>
-      <% if @user.admin.activated == true %>
-        <td>
-          <%= link_to "Remove Privilege", remove_admin_path(:id => @user.id), :method => :post %>
-        </td>
-      <% else %>
-        <td>
-          <%= link_to "Add Privilege", add_admin_path(:id => @user.id), :method => :post %>
-        </td>
-      <% end %>
-    </tr>
-  </table>
+<div class="ui message">
+  <div class="header">About Account Privileges</div>
+  <p>You can assign any of the following account types to the user:</p>
+  <ul class="list">
+    <li>Dean - can view proposals and their comments; gives final decisions for proposals</li>
+    <li>Researcher - can submit proposals</li>
+    <li>Committee Member - can view, vote on, and comment on proposals</li>
+    <li>Committee Head - can view, vote on, and comment on proposals; sets submission period</li>
+    <li>Admin - can manage announcements, account privileges, and review committee assignments</li>
+  </ul>
 </div>
+
+<table class = "ui celled padded table">
+  <tr>
+    <th>
+      Dean
+    </th>
+    <% if @user.dean.activated == true %>
+      <td>
+        <%= link_to "Remove Privilege", remove_dean_path(:id => @user.id), :method => :post %>
+      </td>
+    <% else %>
+      <td>
+        <%= link_to "Add Privilege", add_dean_path(:id => @user.id), :method => :post %>
+      </td>
+    <% end %>
+  </tr>
+  <tr>
+    <th>
+      Researcher
+    </th>
+    <% if @user.researcher.activated == true %>
+      <td>
+        <%= link_to "Remove Privilege", remove_researcher_path(:id => @user.id), :method => :post %>
+      </td>
+    <% else %>
+      <td>
+        <%= link_to "Add Privilege", add_researcher_path(:id => @user.id), :method => :post %>
+      </td>
+    <% end %>
+  </tr>
+  <tr>
+    <th>
+      Committee Member
+    </th>
+    <% if @user.committee_member.activated == true %>
+      <td>
+        <%= link_to "Remove Privilege", remove_committee_member_path(:id => @user.id), :method => :post %>
+      </td>
+    <% else %>
+      <td>
+        <%= link_to "Add Privilege", add_committee_member_path(:id => @user.id), :method => :post %>
+      </td>
+    <% end %>
+  </tr>
+  <tr>
+    <th>
+      Committee Head
+    </th>
+    <% if @user.committee_head.activated == true %>
+      <td>
+        <%= link_to "Remove Privilege", remove_committee_head_path(:id => @user.id), :method => :post %>
+      </td>
+    <% else %>
+      <td>
+        <%= link_to "Add Privilege", add_committee_head_path(:id => @user.id), :method => :post %>
+      </td>
+    <% end %>
+    </tr>
+    <tr>
+    <th>
+      Admin
+    </th>
+    <% if @user.admin.activated == true %>
+      <td>
+        <%= link_to "Remove Privilege", remove_admin_path(:id => @user.id), :method => :post %>
+      </td>
+    <% else %>
+      <td>
+        <%= link_to "Add Privilege", add_admin_path(:id => @user.id), :method => :post %>
+      </td>
+    <% end %>
+  </tr>
+</table>
+
 <br>
 <%= link_to 'Back', assign_account_path, :class => "ui primary button" %>

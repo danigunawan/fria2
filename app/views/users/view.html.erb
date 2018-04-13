@@ -1,16 +1,15 @@
 <h1>Account Details</h1>
-<div class="well">
-  <%= "First Name: " + @user.first_name %>
-  <br>
-  <%= "Last Name: " + @user.last_name %>
-  <br>
-  <%= "Department: " + @user.department %>
-  <br>
-  <%= "Rank: " + @user.rank %>
-  <br>
-  <%= "Contact Number: " + @user.contact_number %>
-  <br>
-  <%= "Email: " + @user.email %>
-</div>
+
+<table class="ui celled padded table">
+	<tbody>
+		<tr><th>First Name</th><td><%= @user.first_name %></td></tr>
+		<tr><th>Last Name</th><td><%= @user.last_name %></td></tr>
+		<tr><th>Department</th><td><%= @user.department %></td></tr>
+		<tr><th>Rank</th><td><%= @user.rank %></td></tr>
+		<tr><th>Contact Number</th><td><%= @user.contact_number %></td></tr>
+    <tr><th>Email</th><td><%= @user.email %></td></tr>
+	</tbody>
+</table>
+
 <br>
 <%= link_to 'Back', assign_account_path, :class => "ui primary button" %>

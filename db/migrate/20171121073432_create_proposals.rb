@@ -7,8 +7,6 @@ class CreateProposals < ActiveRecord::Migration[5.1]
       t.text :objectives
       t.text :descriptions
       t.integer :status
-      t.integer :votes
-      t.boolean :is_vetoed
       t.boolean :is_decided
       t.boolean :is_submitted
 

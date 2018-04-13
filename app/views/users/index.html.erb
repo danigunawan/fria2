@@ -1,9 +1,28 @@
 <h1>Account Management</h1>
-<table class = "table">
-<% @users.each do |user| %>
-  <tr>
-      <td><%= link_to user.full_name, view_user_path(user.id) %></td>
-      <td><%= link_to "Edit Privileges", edit_account_path(user.id) %></td>
-  </tr>
-<% end %>
+<table class="ui celled padded table">
+	<tbody>
+    <% @users.each do |user| %>
+      <tr>
+          <th><%= link_to user.full_name, view_user_path(user.id) %></th>
+          <td>
+          <% if user.dean.activated == true %>
+            <div class="ui label">Dean</div>
+          <% end %>
+          <% if user.researcher.activated == true %>
+            <div class="ui label">Researcher</div>
+          <% end %>
+          <% if user.committee_member.activated == true %>
+            <div class="ui label">Committee Member</div>
+          <% end %>
+          <% if user.committee_head.activated == true %>
+            <div class="ui label">Committee Head</div>
+          <% end %>
+          <% if user.admin.activated == true %>
+            <div class="ui label">Admin</div>
+          <% end %>
+          </td>
+          <td><%= link_to "Edit Privileges", edit_account_path(user.id) %></td>
+      </tr>
+    <% end %>
+	</tbody>
 </table>

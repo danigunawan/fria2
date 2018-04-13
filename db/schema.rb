@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180225092540) do
+ActiveRecord::Schema.define(version: 20180402145652) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,14 @@ ActiveRecord::Schema.define(version: 20180225092540) do
     t.index ["user_id"], name: "index_committee_members_on_user_id"
   end
 
+  create_table "coresearchers", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "affiliation"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "deans", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -75,8 +83,6 @@ ActiveRecord::Schema.define(version: 20180225092540) do
     t.text "objectives"
     t.text "descriptions"
     t.integer "status"
-    t.integer "votes"
-    t.boolean "is_vetoed"
     t.boolean "is_decided"
     t.boolean "is_submitted"
     t.datetime "created_at", null: false
