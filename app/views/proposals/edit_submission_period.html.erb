@@ -1,15 +1,17 @@
 <% if can? :edit, SubmissionPeriod %>
   <h1>Set Submission Period</h1>
   <%= form_for edit_period_path, :html => {:class => "ui form"}, :method => :post do |f|%>
-    <div class="field">
-      <label>Enter start of votation:</label>
-      <%= f.datetime_field :start, required: true%><br>
+    <div class="ui padded segment">
+      <div class="field">
+        <label>Enter start of votation:</label>
+        <%= f.datetime_field :start, required: true%><br>
+      </div>
+      <div class="field">
+        <label>Enter deadline of votation:</label>
+        <%= f.datetime_field :deadline, required: true%><br>
+      </div>
     </div>
-    <div class="field">
-      <label>Enter deadline of votation:</label>
-      <%= f.datetime_field :deadline, required: true%><br>
-    </div>
-    <%= f.submit "Submit", :class => "ui primary button" %>
-    <%= link_to 'Cancel', proposals_path, :class => "ui primary button" %>
+      <%= f.submit "Submit", :class => "ui primary button" %>
+      <%= link_to 'Cancel', proposals_path, :class => "ui primary button" %>
   <% end %>
 <% end %>
