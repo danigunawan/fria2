@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   root :to => 'landing_page#index'
   post '/' => 'landing_page#index', as:'home_page'
+  get '/edit' => 'users#edit_profile', as: 'edit_profile'
+  patch '/edit/:id' => 'users#edited_profile', as: 'user'
   get '/proposals' => 'proposals#index', as:'proposals_page'
   get '/proposals/:id/veto' => 'proposals#veto', as: 'veto'
   post '/proposals/:id/veto' => 'proposals#vetoed', as: 'vetoed'

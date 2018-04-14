@@ -14,6 +14,7 @@
     </div>
     <div class="menu">
       <%= link_to "HOME", home_page_path %>
+      <%= link_to "Edit Profile", edit_profile_path %>
       <% if can? :index, Proposal %>
         | <%= link_to "PROPOSALS", proposals_page_path %>
       <% end %>
@@ -27,7 +28,8 @@
     </div>
   <% else %>
     <div class = "welcome-main">
-      <%= link_to "Log in", new_user_session_path %>
+      <%= link_to "Log in", new_user_session_path %> or  
+      <%= link_to "Sign Up", new_user_registration_path %>
     </div>
   <!--
     <div class = "welcome-main">
