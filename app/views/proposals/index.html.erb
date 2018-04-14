@@ -36,9 +36,21 @@
                 <% else %>
                   <%= link_to "Assign", assign_proposal_path(proposal.id), :class => "ui right floated primary button" %>
                 <% end %>
-                <% if proposal.is_vetoed %>
-                  <div class="ui label">Vetoed</div>
+                <div class="ui label">
+                <% if proposal.is_decided %>
+                  <% if proposal.status == 1 %>
+          					Accepted
+          				<% end %>
+          				<% if proposal.status == -1 %>
+          					Rejected
+          				<% end %>
+          				<% if proposal.status == 0 %>
+          					For Resubmission
+          				<% end %>
+                <% else %>
+          				To Be Evaluated
                 <% end %>
+                </div>
               <% end %>
               <% if can? :review, proposal %>
                 <% if proposal.submission_period.is_set == false%>
