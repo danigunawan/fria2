@@ -1,7 +1,6 @@
 <h1>Edit Profile</h1>
 
 <%= form_for @user, html: { multipart: true, class: "ui form" } do |f| %>
-  <%= devise_error_messages! %>
   <div class="ui padded segment">
     <div class="field">
       <label>First name</label>
@@ -36,7 +35,7 @@
       <%= f.password_field :password_confirmation %>
     </div>
     <div class="field">
-      <label>Current password</label><i>(we need your current password to confirm your changes)</i>
+      <label>Current password</label><i>(we need your current password to confirm your changes)</i><br>
       <%= f.password_field :current_password %>
     </div>
   </div>
