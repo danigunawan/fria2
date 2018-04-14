@@ -1,4 +1,4 @@
-<%= form_with(model: announcement, local: true), :html => {:class => "ui form"}, do |form| %>
+<%= form_with(model: announcement, local: true, class: "ui form") do |form| %>
   <div class="ui padded segment">
     <% if announcement.errors.any? %>
       <div id="error_explanation">
