@@ -2,15 +2,12 @@
 
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @announcement.title %>
-</p>
-
-<p>
-  <strong>Body:</strong>
-  <%= @announcement.body %>
-</p>
+<table class="ui celled padded table">
+	<tbody>
+		<tr><th>Title</th><td><%= @announcement.title %></td></tr>
+		<tr><th>Body</th><td><%= @announcement.body %></td></tr>
+	</tbody>
+</table>
 
 <%= link_to 'Edit', edit_announcement_path(@announcement), :class => "ui primary button" %>
 <%= link_to 'Back', announcements_path, :class => "ui primary button" %>

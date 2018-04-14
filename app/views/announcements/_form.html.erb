@@ -1,5 +1,5 @@
-<%= form_with(model: announcement, local: true) do |form| %>
-  <div class="well">
+<%= form_with(model: announcement, local: true), :html => {:class => "ui form"}, do |form| %>
+  <div class="ui padded segment">
     <% if announcement.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(announcement.errors.count, "error") %> prohibited this announcement from being saved:</h2>

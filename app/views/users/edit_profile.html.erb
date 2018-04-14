@@ -1,25 +1,44 @@
 <h1>Edit Profile</h1>
 
-<div class="well">
-  <%= form_for @user, html: { multipart: true } do |f| %>
-    <%= f.label :first_name %>
-    <%= f.text_field :first_name %>
-    <br><br><%= f.label :last_name %>
-    <%= f.text_field :last_name%>
-    <br><br><%= f.label :Department %>
-    <%= f.text_field :department%>
-    <br><br><%= f.label :Rank %>
-    <%= f.text_field :rank%>
-    <br><br><%= f.label :Contact_Number %>
-    <%= f.text_field :contact_number%>
-    <br><br><%= f.label :email %>
-    <%= f.text_field :email%>
-    <br><br><%= f.label :password %>
-    <%= f.password_field :password%>
-    <br><br><%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation%>
-    <br><br><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br/>
-    <%= f.password_field :current_password %>
-    <br><br><%= f.submit "Save", :class => "btn btn-primary" %>
-  <% end %>
-</div>
+<%= form_for @user, html: { multipart: true, class: "ui form" } do |f| %>
+  <%= devise_error_messages! %>
+  <div class="ui padded segment">
+    <div class="field">
+      <label>First name</label>
+      <%= f.text_field :first_name %>
+    </div>
+    <div class="field">
+      <label>Last name</label>
+      <%= f.text_field :last_name %>
+    </div>
+    <div class="field">
+      <label>Department/Institute</label>
+      <%= f.text_field :department %>
+    </div>
+    <div class="field">
+      <label>Rank</label>
+      <%= f.text_field :rank %>
+    </div>
+    <div class="field">
+      <label>Contact number</label>
+      <%= f.text_field :contact_number %>
+    </div>
+    <div class="field">
+      <label>Email</label>
+      <%= f.email_field :email %>
+    </div>
+    <div class="field">
+      <label>Password</label>
+      <%= f.password_field :password %>
+    </div>
+    <div class="field">
+      <label>Password confirmation</label>
+      <%= f.password_field :password_confirmation %>
+    </div>
+    <div class="field">
+      <label>Current password</label><i>(we need your current password to confirm your changes)</i>
+      <%= f.password_field :current_password %>
+    </div>
+  </div>
+  <%= f.submit "Save", :class => "ui primary button" %>
+<% end %>

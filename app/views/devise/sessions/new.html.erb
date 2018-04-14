@@ -1,14 +1,14 @@
 <h1>Log In</h1>
 
-<form class="ui form">
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<%= form_for(resource, as: resource_name, :html => {:class => "ui form"}, url: session_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
   <div class = "ui padded segment">
     <div class="required field">
-      <label>Email</label>
+      <%= f.label :email %>
       <%= f.email_field :email, autofocus: true, required: true %>
     </div>
     <div class="required field">
-      <label>Password</label>
+      <%= f.label :password %>
       <%= f.password_field :password, autocomplete: "off", required: true %>
     </div>
     <% if devise_mapping.rememberable? -%>
@@ -18,10 +18,7 @@
       </div>
     <% end -%>
   </div>
-  <div class="actions">
-    <%= f.submit "Log in", :class => "ui primary button" %>
-  </div>
+  <%= f.submit "Log in", :class => "ui primary button" %>
 <% end %>
-</form>
 
 <%= render "devise/shared/links" %>
