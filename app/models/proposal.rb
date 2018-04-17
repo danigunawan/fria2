@@ -35,4 +35,22 @@ class Proposal < ApplicationRecord
  		self.status = -1 if self.reviews.length == 3
  		self.is_decided = true if self.status > 0
 	 end
+
+	 def status_string
+	 	status
+	 	if self.status == -1
+	 		status = "Reviewers have not yet been assigned"
+	 	elsif self.status == 0
+	 		status = "Not under votation period"
+	 	elsif self.status = 1
+	 		status = "Under votation period"
+	 	elsif self.status == 2
+	 		status = "Accepted"
+	 	elsif self.status = 3
+	 		status = "Rejected"
+	 	else
+	 		status = "Unknown"
+	 	end
+	 	return status
+	 end	
 end
