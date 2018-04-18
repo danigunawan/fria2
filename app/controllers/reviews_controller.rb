@@ -89,9 +89,9 @@ class ReviewsController < ApplicationController
 
 	
 
-	private 
+	private
 
 	def review_params
-      params.require(:review).permit(:vote)		
+      params.require(:review).permit(:vote)
 	end
 end

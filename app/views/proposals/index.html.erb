@@ -16,6 +16,21 @@
           		<h1 class="ui medium header"><%= proposal.title %></hi>
           	<% end %>
             <div class="extra">
+              <div class="ui label">
+              <% if proposal.is_decided %>
+                <% if proposal.status == 1 %>
+                  Accepted
+                <% end %>
+                <% if proposal.status == -1 %>
+                  Rejected
+                <% end %>
+                <% if proposal.status == 0 %>
+                  For Resubmission
+                <% end %>
+              <% else %>
+                To Be Evaluated
+              <% end %>
+              </div>
               <% if can? :destroy, proposal %>
                 <%= link_to "Delete",  proposal, method: :delete, data: { confirm: 'Are you sure?'}, :class => "ui right floated primary button" %>
               <% end %>
@@ -36,21 +51,6 @@
                 <% else %>
                   <%= link_to "Assign", assign_proposal_path(proposal.id), :class => "ui right floated primary button" %>
                 <% end %>
-                <div class="ui label">
-                <% if proposal.is_decided %>
-                  <% if proposal.status == 1 %>
-          					Accepted
-          				<% end %>
-          				<% if proposal.status == -1 %>
-          					Rejected
-          				<% end %>
-          				<% if proposal.status == 0 %>
-          					For Resubmission
-          				<% end %>
-                <% else %>
-          				To Be Evaluated
-                <% end %>
-                </div>
               <% end %>
               <% if can? :review, proposal %>
                 <% if proposal.submission_period.is_set == false%>

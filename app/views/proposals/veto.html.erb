@@ -1,8 +1,7 @@
-<% if can :veto, @proposal %>
+<% if can? :veto, @proposal %>
   <h1> Vetoing: <%= @proposal.title %> </h1>
-  <%= form_for vetoed_path, :html => {:class => "ui form"}, :method => :post do |f| %>
+  <%= form_for vetoed_path, :html => {:class => "ui form"}, :remote => "true", :method => :post do |f| %>
     <div class="ui padded segment">
-      <br><br>
       <% if @headreview.vote != 1 %>
       	<%= f.radio_button :vote,'1'%>
       	<%= f.label :vote, 'Accept'%>
@@ -22,3 +21,15 @@
     <%= f.submit "Save", :class => "ui primary button" %>
   <% end %>
 <% end %>
+
+<div class="ui modal" style="height: 200px;margin: auto;">
+  <div class="header">Proposal Status Confirmed</div>
+  <div class="content">
+    <p> Committee decision vetoed:
+      <%= @proposal.status_string %>
+    </p>
+  </div>
+  <div class="actions">
+    <%= link_to "OK", reviews_page_path, :class => "ui button" %>
+  </div>
+</div>

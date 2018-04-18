@@ -70,6 +70,9 @@ class ProposalsController < ApplicationController
 	end
 
 	def vetoed
+		respond_to do |format|
+			format.js
+		end
 		@proposal = Proposal.find(params[:id])
 		s = "/proposals/"
 		s << params[:id].to_s
@@ -85,7 +88,6 @@ class ProposalsController < ApplicationController
 		end
 		@proposal.submission_period.save!
 		@proposal.save!
-		redirect_to proposals_page_path
 	end
 
 	def uphold
@@ -208,7 +210,7 @@ class ProposalsController < ApplicationController
 		@proposal.submission_period.end_votation = params[s][:deadline]
 		@proposal.submission_period.save!
 		@proposal.save!
-		
+
 
 		redirect_to proposals_page_path
 	end

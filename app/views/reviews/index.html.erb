@@ -6,6 +6,21 @@
 		<tr><th>Co-researchers</th><td><%= @proposal.coresearchers %></td></tr>
 		<tr><th>Objectives</th><td><%= @proposal.objectives %></td></tr>
 		<tr><th>Description</th><td><%= @proposal.descriptions %></td></tr>
+		<tr><th>Status</th><td>
+			<% if @proposal.is_decided %>
+				<% if @proposal.status == 1 %>
+					Accepted
+				<% end %>
+				<% if @proposal.status == -1 %>
+					Rejected
+				<% end %>
+				<% if @proposal.status == 0 %>
+					For Resubmission
+				<% end %>
+			<% else %>
+				To Be Evaluated
+			<% end %>
+		</td></tr>
 	</tbody>
 </table>
 <br>
@@ -94,6 +109,7 @@
     <% end %>
 <% end %>
 
+<br>
 <% if can? :veto, @proposal %>
 <% if @count == 3 and @proposal.submission_period.is_active_votation %>
     <%= link_to "Uphold", uphold_path(@proposal.id), :class => "ui primary button", :method => :post %>
