@@ -1,10 +1,10 @@
 <h1> Review for <%= @proposal.title %> </h1>
 <%= form_for @review, :html => {:class => "ui form"} do |f| %>
   <div class="ui padded segment">
-    <%= f.radio_button :vote,'1'%>
+    <%= f.radio_button :vote,'2'%>
     <%= f.label :vote, 'Accept'%>
     <br>
-    <%= f.radio_button :vote,'-1'%>
+    <%= f.radio_button :vote,'3'%>
     <%= f.label :vote, 'Reject'%>
     <br>
     <%= f.radio_button :vote,'0'%>

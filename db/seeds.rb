@@ -38,8 +38,8 @@ user = User.create!(first_name: 'Penny', last_name: 'Sims', department: 'ECE', r
 user.committee_head.activated = true
 user.committee_head.save!
 committee_head = user.committee_head
-review = committee_head.reviews.create!(proposal_id: proposal.id, vote: 1, is_decided: true)
-review = committee_head.reviews.create!(proposal_id: proposal2.id, vote: 1, is_decided: true)
+review = committee_head.reviews.create!(proposal_id: proposal.id, vote: 3, is_decided: true)
+review = committee_head.reviews.create!(proposal_id: proposal2.id, vote: 3, is_decided: true)
 review = committee_head.reviews.create!(proposal_id: proposal3.id)
 
 user = User.create!(first_name: 'Beverly', last_name: 'Schmidt', department: 'CS', rank: '5', contact_number: '9768465839', email: 'committee_member1@up.edu.ph', password: "password")
@@ -52,7 +52,7 @@ user = User.create!(first_name: 'Tracy', last_name: 'Ruiz', department: 'ME', ra
 user.committee_member.activated = true
 user.committee_member.save!
 committee_member = user.committee_member
-review = committee_member.reviews.create!(proposal_id: proposal.id, vote: -1, is_decided: true)
+review = committee_member.reviews.create!(proposal_id: proposal.id, vote: 2, is_decided: true)
 
 user = User.create!(first_name: 'Guadalupe', last_name: 'Leonard', department: 'CoE', rank: 'Professor', contact_number: '9768465839', email: 'dean@up.edu.ph', password: "password")
 user.dean.activated = true
