@@ -3,7 +3,6 @@
 	<tbody>
 		<tr><th>Title</th><td><%= @proposal.title %></td></tr>
 		<tr><th>Researcher</th><td><%= User.find(id = @proposal.researcher.user_id).full_name %></td></tr>
-		<tr><th>Co-researchers</th><td><%= @proposal.coresearchers %></td></tr>
 		<tr><th>Objectives</th><td><%= @proposal.objectives %></td></tr>
 		<tr><th>Description</th><td><%= @proposal.descriptions %></td></tr>
 	</tbody>
