@@ -223,7 +223,7 @@ class ProposalsController < ApplicationController
 	end
 
 	private def proposal_params
-     	params.require(:proposal).permit(:title, :objectives, :descriptions, :coresearchers, :researcher_name, :avatar)
+     	params.require(:proposal).permit(:title, :objectives, :descriptions, :researcher_name, :avatar)
     end
 
     private def submission_period_params

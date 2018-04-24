@@ -17,7 +17,7 @@ class Proposal < ApplicationRecord
 	def set_defaults
 	    self.title  ||= ''
 	    self.researcher_name ||= ''
-	    self.coresearchers ||= ''
+	    # self.coresearchers ||= ''
 	    self.objectives ||= ''
 	    self.status ||= -1
 	    # self.votes ||= 0
