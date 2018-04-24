@@ -112,8 +112,26 @@
 <br>
 <% if can? :veto, @proposal %>
 <% if @count == 3 and @proposal.submission_period.is_active_votation %>
-    <%= link_to "Uphold", uphold_path(@proposal.id), :class => "ui primary button", :method => :post %>
+    <%= link_to "Uphold", uphold_path(@proposal.id), :class => "ui primary button", :onclick => "modalUphold()", :method => :post %>
     <%= link_to "Veto", veto_path(@proposal.id), :class => "ui primary button" %>
 <% end %>
 <% end %>
 <%= link_to 'Back', proposals_path, :class => "ui primary button" %>
+
+<div class="ui modal" style="height: 180px;">
+  <div class="header">Proposal Status Confirmed</div>
+  <div class="content">
+    <p> Committee decision upheld:
+      <%= @proposal.status_string %>
+    </p>
+  </div>
+  <div class="actions">
+    <%= link_to "OK", reviews_page_path, :class => "ui button" %>
+  </div>
+</div>
+
+<script language="javascript">
+  function modalUphold(){
+    $('.ui.modal').modal('show');
+  }
+</script>

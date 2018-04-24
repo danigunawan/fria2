@@ -70,9 +70,6 @@ class ProposalsController < ApplicationController
 	end
 
 	def vetoed
-		respond_to do |format|
-			format.js
-		end
 		@proposal = Proposal.find(params[:id])
 		s = "/proposals/"
 		s << params[:id].to_s

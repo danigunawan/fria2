@@ -18,11 +18,11 @@
       <%end%>
     </div>
     <br>
-    <%= f.submit "Save", :class => "ui primary button" %>
+    <%= f.submit "Save", :class => "ui primary button", :onclick => "modalVeto()" %>
   <% end %>
 <% end %>
 
-<div class="ui modal" style="height: 200px;margin: auto;">
+<div class="ui modal" style="height: 180px;">
   <div class="header">Proposal Status Confirmed</div>
   <div class="content">
     <p> Committee decision vetoed:
@@ -33,3 +33,9 @@
     <%= link_to "OK", reviews_page_path, :class => "ui button" %>
   </div>
 </div>
+
+<script language="javascript">
+  function modalVeto(){
+    $('.ui.modal').modal('show');
+  }
+</script>
