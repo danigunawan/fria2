@@ -10,25 +10,11 @@ user.researcher.activated = true
 user.researcher.save!
 researcher = user.researcher
 
-proposal = researcher.proposals.create!(title: 'A Comparative Study of Steel and Wooden Armrests Ergonimically', researcher_name: 'Dawn Fernandez', objectives: 'To compare wood and steel armrests in terms ergonomically speaking', descriptions: 'This paper aims to compare which material is better for use in the production of armrests.', is_assigned_reviewers: false, is_decided: false, avatar: File.open(Rails.root + "app/assets/test_uploads/test.pdf"))
-proposal.submission_period = SubmissionPeriod.create!(start_votation: DateTime.parse("22th Jan 2018 8:00:00 PM"), end_votation: DateTime.parse("20th Feb 2017 8:00:00 PM"), is_set: true, is_active_votation: true)
-proposal = researcher.proposals.create!(title: 'Hypertext Transfer Protocol 10-way handshake',researcher_name: 'Dawn Fernandez', objectives: 'To produce a secure way of exchanging information in HTTP.', descriptions: 'The 10-way handshake includes a handshake between all layers from Physical to Application.', is_assigned_reviewers: false, is_decided: false, avatar: File.open(Rails.root + "app/assets/test_uploads/test.pdf"))
-proposal.submission_period = SubmissionPeriod.create!(start_votation: DateTime.parse("22th Jan 2018 8:00:00 PM"), end_votation: DateTime.parse("20th Feb 2017 8:00:00 PM"), is_set: true, is_active_votation: true)
-proposal = researcher.proposals.create!(title: 'Dijkstra\'s Algorithm Refinements', researcher_name: 'Dawn Fernandez', objectives: 'To improve Uniform-Cost searches', descriptions: 'This algorithm is the same as Dijkstra\'s algorithm with the inclusion of pruning states which are already \'expired\'', is_assigned_reviewers: false, is_decided: false, avatar: File.open(Rails.root + "app/assets/test_uploads/test.pdf"))
-proposal.submission_period = SubmissionPeriod.create!(start_votation: DateTime.parse("22th Jan 2018 8:00:00 PM"), end_votation: DateTime.parse("20th Mar 2017 8:00:00 PM"), is_set: true, is_active_votation: true)
+
 
 user = User.create!(first_name: 'Isabel', last_name: 'Lawrence', department: 'CS', rank: 'Professor', contact_number: '9333867460', email: 'researcher2@up.edu.ph', password: "password")
 user.researcher.save!
 researcher = user.researcher
-
-proposal3 = researcher.proposals.create!(title: 'Faculty Research Incentive Award', researcher_name: 'Isabel Lawrence', objectives: 'To effectively design a system wherein the College of Engineering can handle research proposal grants.', descriptions: 'This project is developed intentionally for the College of Engineering faculty and administration.', is_assigned_reviewers: false, is_decided: false, avatar: File.open(Rails.root + "app/assets/test_uploads/test.pdf"))
-# proposal3.submission_period = SubmissionPeriod.create!(start_votation: DateTime.parse("22th Jan 2018 8:00:00 PM"), end_votation: DateTime.parse("20th Feb 2017 8:00:00 PM"), is_set: true, is_active_votation: true)
-proposal = researcher.proposals.create!(title: 'Transformation of Simple Inorganic Materials to Aldehydes through Oxidation with Carbon Catalysts', researcher_name: 'Isabel Lawrence', objectives: 'This study aims to convert simple inorganic materials like oxygen to aldehydes to produce simple building blocks of life.', descriptions: 'Through continuous oxidation simple inorganic materials can be transformed to simple organic materials by introducng carbon catalysts.', is_assigned_reviewers: false, is_decided: false, avatar: File.open(Rails.root + "app/assets/test_uploads/test.pdf"))
-proposal.submission_period = SubmissionPeriod.create!(start_votation: DateTime.parse("22th Jan 2018 8:00:00 PM"), end_votation: DateTime.parse("20th Feb 2017 8:00:00 PM"), is_set: true, is_active_votation: true)
-proposal2 = researcher.proposals.create!(title: 'Proof of NP-Completeness of RSA decryption', researcher_name: 'Isabel Lawrence', objectives: 'Addition of an NP-Complete problem to aid in proving/disproving P = NP problem', descriptions: 'This paper discusses how RSA decryption is NP-Complete through reduction from 3-SAT Problem', is_assigned_reviewers: true, is_decided: false, avatar: File.open(Rails.root + "app/assets/test_uploads/test.pdf"))
-proposal2.submission_period = SubmissionPeriod.create!(start_votation: DateTime.parse("22th Jan 2018 8:00:00 PM"), end_votation: DateTime.parse("20th Feb 2017 8:00:00 PM"), is_set: true, is_active_votation: true)
-proposal = researcher.proposals.create!(title: 'Oil leakage sensors installation in the West Philippine Sea', researcher_name: 'Isabel Lawrence', objectives: 'To immediately alarm the crew and coast guards of potential oil leakages.', descriptions: 'The sensor is built using radio waves which can sense large amounts of interference because of the density of the oil as compared to sea water.', is_assigned_reviewers: true, is_decided: false, avatar: File.open(Rails.root + "app/assets/test_uploads/test.pdf"))
-proposal.submission_period = SubmissionPeriod.create!(start_votation: DateTime.parse("22th Jan 2017 8:00:00 PM"), end_votation: DateTime.parse("20th Dec 2018 8:00:00 PM"), is_set: true, is_active_votation: true)
 
 user = User.create!(first_name: 'Emmett', last_name: 'Alvarez', department: 'CE', rank: 'Professor', contact_number: '9835583620', email: 'admin@up.edu.ph', password: 'password')
 user.admin.activated = true
@@ -38,21 +24,16 @@ user = User.create!(first_name: 'Penny', last_name: 'Sims', department: 'ECE', r
 user.committee_head.activated = true
 user.committee_head.save!
 committee_head = user.committee_head
-review = committee_head.reviews.create!(proposal_id: proposal.id, vote: 3, is_decided: true)
-review = committee_head.reviews.create!(proposal_id: proposal2.id, vote: 3, is_decided: true)
-review = committee_head.reviews.create!(proposal_id: proposal3.id)
 
 user = User.create!(first_name: 'Beverly', last_name: 'Schmidt', department: 'CS', rank: '5', contact_number: '9768465839', email: 'committee_member1@up.edu.ph', password: "password")
 user.committee_member.activated = true
 user.committee_member.save!
 committee_member = user.committee_member
-review = committee_member.reviews.create!(proposal_id: proposal.id, vote: 0, is_decided: true)
 
 user = User.create!(first_name: 'Tracy', last_name: 'Ruiz', department: 'ME', rank: 'Professor', contact_number: '9768465838', email: 'committee_member2@up.edu.ph', password: "password")
 user.committee_member.activated = true
 user.committee_member.save!
 committee_member = user.committee_member
-review = committee_member.reviews.create!(proposal_id: proposal.id, vote: 2, is_decided: true)
 
 user = User.create!(first_name: 'Guadalupe', last_name: 'Leonard', department: 'CoE', rank: 'Professor', contact_number: '9768465839', email: 'dean@up.edu.ph', password: "password")
 user.dean.activated = true
