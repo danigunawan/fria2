@@ -22,6 +22,7 @@ class Proposal < ApplicationRecord
 	    self.status ||= -1
 	    # self.votes ||= 0
 	    # self.is_vetoed = false if self.is_vetoed.nil?
+	    self.is_withdrawn = false if self.is_decided.nil?
 	 	self.is_decided = false if self.is_decided.nil?
 	 	self.is_assigned_reviewers = true if self.reviews.length == 3
 	 	self.is_submitted = false if self.is_submitted.nil?
