@@ -17,23 +17,18 @@
           	<% end %>
             <div class="extra">
               <div class="ui label">
-              <% if proposal.is_decided %>
-                <% if proposal.status == 2 %>
-                  Accepted
-                <% end %>
-                <% if proposal.status == 3 %>
-                  Rejected
-                <% end %>
-                <% if proposal.status == 0 %>
-                  For Resubmission
-                <% end %>
-              <% else %>
-                To Be Evaluated
-              <% end %>
+                <%= @proposal.status_string %>
               </div>
               <% if can? :destroy, proposal %>
-                <%= link_to "Delete",  proposal, method: :delete, data: { confirm: 'Are you sure?'}, :class => "ui right floated primary button" %>
+                <%= link_to "Delete", proposal, method: :delete, data: { confirm: 'Deleting Proposal: Are you sure?'}, :class => "ui right floated primary button" %>
               <% end %>
+              <%# if can? :withdraw, proposal %>
+                <%# if !proposal.is_withdrawn %>
+                  <%#= link_to "Withdraw", withdraw_proposal_path(proposal.id), data: { confirm: 'Withdrawing Proposal: Are you sure?'}, :class => "ui right floated primary button" %>
+                <%# else %>
+                  <%#= link_to "Submit", submit_proposal_path(proposal.id), :class => "ui right floated primary button" %>
+                <%# end %>
+              <%# end %>
               <% if can? :update, proposal %>
                 <%= link_to "Update", edit_proposal_path(proposal.id), :class => "ui right floated primary button" %>
             	<% end %>

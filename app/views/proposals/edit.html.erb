@@ -14,9 +14,11 @@
     <label>Description</label>
     <%= f.text_area :descriptions, required: true %>
   </div>
-  <div class="required field">
-    <label>File</label>
-    <%= f.file_field :avatar, accept: '.pdf', required: true %>
+  <label>File Information</label>
+  <br> (to be added)
+  <div class="field">
+    <label>Change File (optional)</label>
+    <%= f.file_field :avatar, accept: '.pdf', required: false %>
   </div>
 </div>
   <%= f.submit "Save", :class => "ui primary button" %>
