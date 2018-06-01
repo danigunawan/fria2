@@ -5,21 +5,8 @@
 		<tr><th>Researcher</th><td><%= User.find(id = @proposal.researcher.user_id).full_name %></td></tr>
 		<tr><th>Objectives</th><td><%= @proposal.objectives %></td></tr>
 		<tr><th>Description</th><td><%= @proposal.descriptions %></td></tr>
-		<tr><th>Status</th><td>
-			<% if @proposal.is_decided %>
-				<% if @proposal.status == 2 %>
-					Accepted
-				<% end %>
-				<% if @proposal.status == 3 %>
-					Rejected
-				<% end %>
-				<% if @proposal.status == 0 %>
-					For Resubmission
-				<% end %>
-			<% else %>
-				To Be Evaluated
-			<% end %>
-		</td></tr>
+		<tr><th>File Information</th><td><%= File.basename(@proposal.avatar.path) %> (<%= number_to_human_size(File.size(@proposal.avatar.path)) %>), uploaded <%= File.mtime(@proposal.avatar.path) %></td></tr>
+		<tr><th>Status</th><td><%= @proposal.status_string %></td></tr>
 	</tbody>
 </table>
 <br>
