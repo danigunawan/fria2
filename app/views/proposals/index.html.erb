@@ -17,7 +17,7 @@
           	<% end %>
             <div class="extra">
               <div class="ui label">
-                <%= @proposal.status_string %>
+                <%= proposal.status_string %>
               </div>
               <% if can? :destroy, proposal %>
                 <%= link_to "Delete", proposal, method: :delete, data: { confirm: 'Deleting Proposal: Are you sure?'}, :class => "ui right floated primary button" %>
