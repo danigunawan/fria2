@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180402145652) do
+ActiveRecord::Schema.define(version: 20180530092612) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 20180402145652) do
     t.string "avatar"
     t.bigint "researcher_id"
     t.boolean "is_assigned_reviewers"
+    t.boolean "is_withdrawn"
     t.index ["researcher_id"], name: "index_proposals_on_researcher_id"
   end
 

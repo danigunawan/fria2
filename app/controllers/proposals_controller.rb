@@ -1,4 +1,5 @@
 class ProposalsController < ApplicationController
+	include ActionView::Helpers::NumberHelper
 	def new
 		@proposal = Proposal.new
 		authorize! :new, @proposal
