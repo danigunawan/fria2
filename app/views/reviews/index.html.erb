@@ -7,10 +7,10 @@
 		<tr><th>Description</th><td><%= @proposal.descriptions %></td></tr>
 		<tr><th>Status</th><td>
 			<% if @proposal.is_decided %>
-				<% if @proposal.status == 1 %>
+				<% if @proposal.status == 2 %>
 					Accepted
 				<% end %>
-				<% if @proposal.status == -1 %>
+				<% if @proposal.status == 3 %>
 					Rejected
 				<% end %>
 				<% if @proposal.status == 0 %>
@@ -41,9 +41,9 @@
       <tr>
         <td>
             <% if review.is_decided %>
-                <% if review.vote == 1 %>
+                <% if review.vote == 2 %>
                     Accept
-                <% elsif review.vote == -1 %>
+                <% elsif review.vote == 3 %>
                     Reject
                 <% elsif review.vote == 0 %>
                     Resubmit
@@ -110,7 +110,7 @@
 
 <br>
 <% if can? :veto, @proposal %>
-<% if @count == 3 and @proposal.submission_period.is_active_votation %>
+<% if @count == 3 and @proposal.submission_period.is_active_votation and @proposal.is_decided != true%>
     <%= link_to "Uphold", uphold_path(@proposal.id), :class => "ui primary button", :onclick => "modalUphold()", :method => :post %>
     <%= link_to "Veto", veto_path(@proposal.id), :class => "ui primary button" %>
 <% end %>

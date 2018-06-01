@@ -22,6 +22,7 @@ class Proposal < ApplicationRecord
 	    self.status ||= -1
 	    # self.votes ||= 0
 	    # self.is_vetoed = false if self.is_vetoed.nil?
+	    self.is_withdrawn = false if self.is_decided.nil?
 	 	self.is_decided = false if self.is_decided.nil?
 	 	self.is_assigned_reviewers = true if self.reviews.length == 3
 	 	self.is_submitted = false if self.is_submitted.nil?
@@ -30,10 +31,10 @@ class Proposal < ApplicationRecord
 	 end
 
 	 def set_status
- 		self.status = 1 if self.submission_period.is_active_votation
- 		self.status = 0 if !self.submission_period.is_set
- 		self.status = -1 if self.reviews.length == 3
- 		self.is_decided = true if self.status > 0
+ 		self.is_decided = true if self.status > 1
+		self.status = 1 if self.submission_period.is_active_votation and self.submission_period.is_set and !self.is_decided
+		self.status = 0 if !self.submission_period.is_set
+		self.status = -1 if self.reviews.length != 3
 	 end
 
 	 def status_string

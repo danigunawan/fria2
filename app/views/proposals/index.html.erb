@@ -18,10 +18,10 @@
             <div class="extra">
               <div class="ui label">
               <% if proposal.is_decided %>
-                <% if proposal.status == 1 %>
+                <% if proposal.status == 2 %>
                   Accepted
                 <% end %>
-                <% if proposal.status == -1 %>
+                <% if proposal.status == 3 %>
                   Rejected
                 <% end %>
                 <% if proposal.status == 0 %>

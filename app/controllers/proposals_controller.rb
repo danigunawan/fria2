@@ -75,13 +75,10 @@ class ProposalsController < ApplicationController
 		s << params[:id].to_s
 		s << "/veto"
 		if params[s][:vote] == '0'
-			@proposal.submission_period.start_votation = nil
-			@proposal.submission_period.end_votation = nil
 			@proposal.submission_period.is_set = false
-			@proposal.submission_period.is_active_votation = false
 		else
 			@proposal.status = params[s][:vote]
-			@proposal.is_decided = 1
+			@proposal.is_decided = true
 		end
 		@proposal.submission_period.save!
 		@proposal.save!
@@ -93,12 +90,10 @@ class ProposalsController < ApplicationController
 		@reviews.each do |review|
 			if review.committee_member_id.nil?
 				if review.vote == 0
-					proposal.submission_period.start_votation = nil
-					@proposal.submission_period.end_votation = nil
 					@proposal.submission_period.is_set = false
 				else
 					@proposal.status = review.vote
-					@proposal.is_decided = 1
+					@proposal.is_decided = true
 				end
 			end
 		end
@@ -188,6 +183,7 @@ class ProposalsController < ApplicationController
 		if @proposal.committee_members.length != 2 or @proposal.committee_heads.length != 1
 			@proposal.is_assigned_reviewers = false
 		end
+		@reviewer.save!
 		@proposal.save!
 		redirect_to assign_proposal_path
 	end

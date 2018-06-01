@@ -56,7 +56,9 @@ class Ability
           models.status == 0 or models.status == 1
         end
         can :veto, Proposal do |proposal|
-          proposal.is_decided == false or proposal.status == 2 or proposal.status == 3
+          proposal.is_decided == false
+          proposal.status != 2 or proposal.status != 3
+          proposal.status == 1
         end
         can [:index, :read], Review do |models|
           models.status == 0 or models.status == 1

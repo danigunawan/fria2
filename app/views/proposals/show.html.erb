@@ -7,10 +7,10 @@
 		<tr><th>Description</th><td><%= @proposal.descriptions %></td></tr>
 		<tr><th>Status</th><td>
 			<% if @proposal.is_decided %>
-				<% if @proposal.status == 1 %>
+				<% if @proposal.status == 2 %>
 					Accepted
 				<% end %>
-				<% if @proposal.status == -1 %>
+				<% if @proposal.status == 3 %>
 					Rejected
 				<% end %>
 				<% if @proposal.status == 0 %>
@@ -39,3 +39,5 @@
 	<%= link_to "See Reviews", reviews_page_path(@proposal.id), :class => "ui primary button"%>
 <% end %>
 <%= link_to 'Back', proposals_path, :class => "ui primary button" %>
+
+
