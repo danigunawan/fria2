@@ -58,6 +58,13 @@ class ProposalsController < ApplicationController
     	redirect_to proposals_page_path
 	end
 
+	def withdraw
+		@proposal = Proposal.find(params[:id])
+		@proposal.is_withdrawn = true
+		@proposal.save!
+		redirect_to proposals_page_path
+	end
+
 	def veto
 		@proposal = Proposal.find(params[:id])
 		@reviews = @proposal.reviews

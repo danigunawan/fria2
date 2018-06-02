@@ -32,6 +32,7 @@ class Proposal < ApplicationRecord
 
 	 def set_status
  		self.is_decided = true if self.status > 1
+ 		self.status = -2 if self.is_withdrawn
 		self.status = 1 if self.submission_period.is_active_votation and self.submission_period.is_set and !self.is_decided
 		self.status = 0 if !self.submission_period.is_set
 		self.status = -1 if self.reviews.length != 3
@@ -39,7 +40,9 @@ class Proposal < ApplicationRecord
 
 	 def status_string
 	 	status
-	 	if self.status == -1
+	 	if self.status == -2
+	 		status = "Proposal withdrawn"
+	 	elsif self.status == -1
 	 		status = "Reviewers have not yet been assigned"
 	 	elsif self.status == 0
 	 		status = "Not under votation period"

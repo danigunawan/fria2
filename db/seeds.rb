@@ -16,6 +16,7 @@ user = User.create!(first_name: 'Isabel', last_name: 'Lawrence', department: 'CS
 user.researcher.save!
 researcher = user.researcher
 
+
 user = User.create!(first_name: 'Emmett', last_name: 'Alvarez', department: 'CE', rank: 'Professor', contact_number: '9835583620', email: 'admin@up.edu.ph', password: 'password')
 user.admin.activated = true
 user.admin.save!

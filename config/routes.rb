@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get '/proposals/:id/editsubmissionperiod' => 'proposals#edit_submission_period', as: 'edit_submission_period'
   post '/proposals/:id/editsubmissionperiod' => 'proposals#edit_period', as: 'edit_period'
   get '/under_construction', to: "landing_page#under_construction", as: "under_construction"
+  get '/proposals/:id/withdraw' => 'proposals#withdraw', as: 'withdraw_proposal'
   get 'proposals/:id/reviews' => 'reviews#index', as: 'reviews_page'
   post 'proposals/:id/reviews' => 'reviews#add_comment', as:"add_comment"
   post 'proposals/:id/uphold' => 'proposals#uphold', as:"uphold"

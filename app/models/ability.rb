@@ -31,7 +31,7 @@ class Ability
       if user.curr_type == 'Researcher'
         can [:index, :read], Proposal, researcher_id: user.researcher.id
         can [:create, :new], Proposal
-        can [:edit, :update, :destroy], Proposal do |proposal|
+        can [:edit, :update, :destroy, :withdraw], Proposal do |proposal|
           proposal.researcher_id == user.researcher.id
           proposal.is_decided == false
           proposal.submission_period.is_active_votation == false
