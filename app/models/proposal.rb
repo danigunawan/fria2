@@ -33,7 +33,7 @@ class Proposal < ApplicationRecord
 	 def set_status
 	 	if self.is_withdrawn
  			self.status = -2
- 		elsif self.reviews != 3
+ 		elsif self.is_assigned_reviewers == false
 	 		self.status = -1
 	 	elsif !self.submission_period.is_set
 	 		self.status = 0

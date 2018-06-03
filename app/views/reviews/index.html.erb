@@ -10,6 +10,9 @@
 	</tbody>
 </table>
 <br>
+<% if @proposal.avatar_url %>
+    <%= link_to "Download proposal", @proposal.avatar_url, :class => "ui primary button" %>
+<% end %>
 <% if can? :update, @my_review %>
     <% if @canvote %>
         <% if @my_review.is_decided %>

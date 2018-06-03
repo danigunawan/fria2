@@ -48,12 +48,12 @@
                 <% end %>
               <% end %>
               <% if can? :review, proposal %>
-                <% if proposal.submission_period.is_set == false%>
+                <% if proposal.submission_period.is_set == false and !proposal.is_withdrawn%>
                   <% if can? :update, proposal.submission_period %>
                     <%= link_to "Set proposal timeline", edit_submission_period_path(proposal.id), :class => "ui right floated primary button" %>
                   <% end %>
                 <% else %>
-                  <% if can? :update, proposal.submission_period %>
+                  <% if can? :update, proposal.submission_period and !proposal.is_withdrawn%>
                     <%= link_to "Update proposal timeline", edit_submission_period_path(proposal.id), :class => "ui right floated primary button" %>
                   <% end %>
                   <% if current_user.curr_type == 'CommitteeMember' %>
