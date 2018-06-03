@@ -40,7 +40,7 @@ class Ability
         can :withdraw, Proposal do |proposal|
           proposal.researcher_id == user.researcher.id
           proposal.is_decided == false
-          proposal.status < 1
+          proposal.status <= 1
         end
       elsif user.curr_type == 'CommitteeMember'
         can [:index, :read, :comment], Proposal

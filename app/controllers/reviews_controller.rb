@@ -4,6 +4,9 @@ class ReviewsController < ApplicationController
 		@comment = Comment.new
 		@comment.proposal_id = @proposal.id
 		@reviews = @proposal.reviews
+		puts "+++++++++"
+		puts @reviews.length
+		puts "+++++++++"
 		authorize! :index, Review
 		@my_review = nil
 		if current_user.curr_type == 'CommitteeMember'

@@ -14,7 +14,7 @@
     <%= link_to "Download proposal", @proposal.avatar_url, :class => "ui primary button" %>
 <% end %>
 <% if can? :update, @my_review %>
-    <% if @canvote %>
+    <% if @canvote and !@proposal.is_withdrawn %>
         <% if @my_review.is_decided %>
             <%= link_to "Update my review", edit_review_path(:reviewid=>@my_review.id, :proposalid=>@proposal.id), :class => "ui primary button" %>
         <% else %>
@@ -38,6 +38,7 @@
                 <% elsif review.vote == 0 %>
                     Resubmit
                 <% end %>
+                <% @count = @count + 1 %>
             <% end %>
         </td>
         <td>
@@ -55,7 +56,6 @@
         	<% end %>
         </td>
       </tr>
-    <% @count = @count + 1 %>
 <% end %>
 </table>
 <% if can? :comment, @proposal %>
