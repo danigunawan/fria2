@@ -31,11 +31,16 @@ class Proposal < ApplicationRecord
 	 end
 
 	 def set_status
- 		self.is_decided = true if self.status > 1
- 		self.status = -2 if self.is_withdrawn
-		self.status = 1 if self.submission_period.is_active_votation and self.submission_period.is_set and !self.is_decided
-		self.status = 0 if !self.submission_period.is_set
-		self.status = -1 if self.reviews.length != 3
+	 	if self.is_withdrawn
+ 			self.status = -2
+ 		elsif self.reviews != 3
+	 		self.status = -1
+	 	elsif !self.submission_period.is_set
+	 		self.status = 0
+	 	elsif self.submission_period.is_active_votation and self.submission_period.is_set and !self.is_decided
+	 		self.status = 1
+	 	end
+	 	self.is_decided = true if self.status > 1
 	 end
 
 	 def status_string
